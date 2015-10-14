@@ -1,0 +1,14 @@
+Bonjour,
+
+Voici le projet que nous avons réalisé dans le cadre de notre cours "languages et technologies du Web" durant l'année 2014-2015.
+
+Le projet à été commun aux étudiants M1 WIC (Web, informatique et connaissances) et M1 DCISS (double compétence : informatique et sciences sociales).
+
+Nous avons été trois à colaborer sur ce projet : 2 WIC (Dimitri Scole et Pierre Yves Berger-Sabbatel) et 1 DCISS (Florent Martinier).
+
+Pour utiliser cette application, noubliez pas de mettre le dossier dans le serveur Wamp (et de le mettre en route).
+De plus, avec le terminal, placez vous dans le dossier "MusicPlayer.Rest", et effectuez la commande "node MusicPlayerService.js" pour lancer le service.
+
+Ouvrez la page index.html depuis Wamp, et vous pourrez pleinement profiter de l'application.
+
+Merci de l'attention et à bientôt !
