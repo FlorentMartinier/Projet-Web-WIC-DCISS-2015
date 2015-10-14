@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr-FR" lang="fr-FR">
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <link rel="icon" type="image/png" href="images/favicon.ico"/>
+
+        <script src="scripts/lib/jquery.min.js"></script>
+        <script src="scripts/lib/jquery.cookie.js"></script>
+        <script src="scripts/lib/dz.js"></script>
+
+        <script src="scripts/MusicPlayerLocalClient.js"></script>
+        <script src="scripts/MusicPlayerRestClient.js"></script>
+        <script src="scripts/MusicPlayerView.js"></script>
+        <!--<script src="scripts/Track.js"></script>-->
+        <script src="scripts/MusicPlayerController.js"></script>
+        <script src="scripts/init.js"></script>
+        <script src="scripts/events.js"></script>
+        <script src="scripts/misc.js"></script>
+
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+
+        <title>Projet Music Player</title>
+
+    </head>
+    <body>
+
+        <div id="modal">
+            <div id="modalContentCatalog">
+                <div class="closeModal">Fermer</div>
+                <div class="refreshCatalog"><i class="fa fa-refresh fa-2x"></i></div>
+                <h3>Ajouter une musique du catalogue</h3>
+				<div id="musicCatalog"></div>
+            </div>
+            <div id="modalContentSearch">
+
+                <div class="closeModal">Fermer</div>
+                <h3>Chercher une musique hors catalogue</h3>
+                <i style="font-size: 21px" class="fa fa-search"></i> <input type="text" value="" placeHolder="Entrez un nom d'artiste" size="40" id="searchArtist" />
+
+                <div class="loading"><i style="font-size: 80px; margin-top: 100px" class="fa fa-spinner fa-pulse"></i></div>
+
+                <div id="result"></div>
+
+            </div>
+        </div>
+	
+        <div id="title"><h2>Projet Music Player Master IC2A 2015</h2></div>
+
+        <div id="test"></div>
+		<!--<div id="catalogue"><a href="scripts/catalogue_musique.php">Catalogue</a></div>-->
+        <div id="res"></div>
+
+        <div id="dz-root"></div>
+        <div id="dz-player" align="center"></div>
+
+        <div id="player">
+
+            <h3>A l'écoute actuellement</h3>
+
+            <!--<div style="font-weight: bold; cursor: pointer; text-align: center; font-size: 60px" id="play"><i class="fa fa-play-circle"></i></div>-->
+            <!--<p style="text-align: center; font-size: 10px">(bouton à supprimer...)</p>-->
+
+            <div id="currentTrack">
+
+                <div class="loading"><i style="font-size: 40px" class="fa fa-spinner fa-pulse"></i></div>
+
+                <table>
+                    <tr>
+                        <td rowspan="3" id="CTCover"></td>
+                        <td id="CTArtistName"></td>
+                    </tr>
+                    <tr>
+                        <td id="CTTitle"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                           <span id="CTAlbumName"></span>&nbsp;<span id="CTRelease"></span>
+                            <br />
+                            <span id="CTGenre"></span>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <div id="progressBar"><div id="progressBarInfo"></div><div id="progressBarInt"></div></div>
+
+        </div>
+
+        <div id="playListBtn">
+            <span id="btnCatalog">Catalogue</span>
+            <span id="btnSearch">Chercher une chanson</span>
+        </div>
+        <div id="playlist">
+
+            <h3>Liste de lecture</h3>
+            <!-- Contains the track that is being played-->
+
+            <!-- Table containing the proposed tracks-->
+            <div class="loading"><i style="font-size: 80px" class="fa fa-spinner fa-pulse"></i></div>
+            <div id="proposedTracks"></div>
+
+        </div>
+        
+        <footer>
+            
+            <p>Dimitri SCOLE, Pierre-Yves BERGER-SABBATEL, Florent MARTINIER: étudiant Master IC2A 2015</p>
+            
+        </footer>
+        
+        <script>
+            $("#switchStyle").click(function() {
+                /*var ancienDesign = $cookie('design');
+                if (ancienDesign == 'red') {
+                    $("#footer").css("background-color:#FE2EC8");
+                    $("#btnCatalog").css("background-color:#FE2EC8");
+                    $("#btnSearch").css("background-color:#FE2EC8");
+                } else {*/
+                    $("#footer").css("background-color:#FE2EC8");
+                    $("#btnCatalog").css("background-color:#FE2EC8");
+                    $("#btnSearch").css("background-color:#FE2EC8");
+                //}
+            });
+        </script>
+
+    </body>
+
+</html>

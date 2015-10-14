@@ -1,0 +1,50 @@
+function MusicPlayerRestClient(){
+
+    var CURRENT_TRACK_URI   = 'http://localhost:3000/playlist/currentTrack';
+    var PROPOSED_TRACKS_URI = 'http://localhost:3000/playlist/proposedTracks';
+    var VOTE_TRACK_URI      = 'http://localhost:3000/playlist/voteTrack';
+    var CATALOG_URI         = 'http://localhost:3000/catalog/';
+
+    this.getCurrentTrack = function() {
+        return this.doRequest('GET', CURRENT_TRACK_URI, null, false);
+    };
+
+    this.getProposedTracks = function () {
+        return this.doRequest('GET', PROPOSED_TRACKS_URI, null, false);
+    };
+
+    this.proposeTrack = function(trackID, button, callback) {
+        return this.doRequest('PUT', PROPOSED_TRACKS_URI + "/" + trackID, null, true, button, callback);
+    }
+    
+     this.voteTrack = function(trackID, button, callback) {
+        return this.doRequest('PUT', VOTE_TRACK_URI + "/" + trackID, null, true, button, callback);
+    };
+	
+    this.getCatalog = function() {
+        return this.doRequest('GET', CATALOG_URI, null, true);
+    };
+
+    this.doRequest = function(verb, url, data, async, button, callback) {
+
+        var response;
+
+        $.ajax({
+            url:  url,
+            type: verb,
+            async: false,
+            dataType: 'json',
+            success: function(resp) {
+                response = resp;
+                if (callback != null) callback(button);
+            },
+            error: function(xhr) {
+                response = "Error when " + verb + " " + url + " : " + xhr;
+            }
+        });
+
+        return response;
+
+    }; // method
+
+} // class

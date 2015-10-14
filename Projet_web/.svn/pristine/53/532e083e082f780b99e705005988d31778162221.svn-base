@@ -1,0 +1,25 @@
+function MusicPlayerLocalClient(){
+
+    var currentTrack   = 76548610;
+    var proposedTracks = [61601926, 11015025, 2152785, 307143];
+    var previousTracks = [ ];
+
+    this.getCurrentTrack = function(){
+        return currentTrack;
+    };
+
+    this.getProposedTracks = function (){
+        return proposedTracks;
+    };
+
+    this.getPreviousTracks = function(){
+        return previousTracks;
+    };
+
+    this.getNextTrack = function(){
+        previousTracks.push(currentTrack);
+        currentTrack = proposedTracks.shift();
+        return currentTrack;
+    };
+
+} // class

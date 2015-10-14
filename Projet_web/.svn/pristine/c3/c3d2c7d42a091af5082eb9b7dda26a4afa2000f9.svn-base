@@ -1,0 +1,194 @@
+function MusicPlayerController() {
+
+    //this.musicPlayer = new MusicPlayerLocalClient();
+    this.musicPlayer = new MusicPlayerRestClient();
+
+    this.currentTrack   = null;
+    this.proposedTracks = [];
+
+    this.playing = false;
+
+    this.firstLoading = true;
+
+    this.currentTrackEnded = true;
+
+}
+
+MusicPlayerController.prototype.updatePlaylist = function () {
+
+    this.currentTrack = this.musicPlayer.getCurrentTrack();
+
+    if (this.currentTrack == null) {
+        this.playing = false;
+    }
+    else if (!this.playing) {
+        this.play();
+    }
+
+    if (this.currentTrackEnded) {
+        view.refreshCurrentTrack(this.currentTrack);
+        this.currentTrackEnded = false;
+    }
+
+    var newPropTracks = this.musicPlayer.getProposedTracks();
+
+    if (!arePropTracksEqual(newPropTracks, this.proposedTracks)) {
+
+        // affichage de l'image animée de chargement
+        view.loadingProposedTracks();
+
+        var oldTracks = [];
+        for (var i = 0; i < this.proposedTracks.length; i++) {
+            oldTracks.push(this.proposedTracks[i].id);
+        }
+
+        view.refreshProposedTracks(newPropTracks, oldTracks, this.firstLoading);
+
+        this.firstLoading = false;
+
+        this.proposedTracks = newPropTracks;
+
+        cont.refreshPlayerTrackList();
+
+    }
+
+    view.endLoadProposedTrack();
+
+    setTimeout(function() {
+        cont.updatePlaylist();
+    }, 1000);
+
+};
+
+MusicPlayerController.prototype.play = function () {
+
+    if (this.currentTrack != null) {
+
+        // calcul de la position de lecture
+        //var posLecture = parseInt(Math.ceil(this.currentTrack.position / this.currentTrack.duration * 100));
+        //
+        //lastStartTime = Date.now();
+
+        var tracks = [this.currentTrack.id];
+
+        for (var i  = 0; i < this.proposedTracks.length; i++) {
+            tracks.push(this.proposedTracks[i].id);
+        }
+
+        DZ.player.playTracks(tracks, 0, parseInt(this.currentTrack.position));
+
+        this.playing = true;
+
+    }
+
+};
+
+MusicPlayerController.prototype.refreshPlayerTrackList = function () {
+
+    var trackList = DZ.player.getTrackList();
+    var newTrackList = [parseInt(cont.currentTrack.id)];
+
+    // on ajoute les pistes (elles ne s'ajouteront pas une 2e fois)
+    for (var i = 0; i < this.proposedTracks.length; i++) {
+
+        DZ.player.addToQueue([parseInt(this.proposedTracks[i].id)]);
+
+        newTrackList.push(parseInt(this.proposedTracks[i].id));
+
+    }
+
+    var found;
+
+    // on ajoute au début les pistes déjà jouées (si elles n'ont pas été ajoutées de nouveau)
+    for (var i = 0; i < DZ.player.getCurrentIndex(); i++) {
+
+        found = false;
+
+        // recherche de l'id dans les newTracks
+        for (var j = 0; j < newTrackList.length && !found; j++) {
+            if (newTrackList[j] == trackList[i].id) {
+                found = true;
+            }
+        }
+
+        // si le morceau n'a pas été de nouveau ajouté, on le remet au début de la playlist
+        if (!found) {
+            newTrackList.unshift(parseInt(trackList[i].id));
+        }
+
+    }
+
+    DZ.player.changeTrackOrder(newTrackList);
+
+}
+
+MusicPlayerController.prototype.searchTrack = function (search) {
+
+    view.loadingSearch();
+
+    DZ.api('/search/track?q=' + search, function(response){
+        view.setSearchResult(response.data);
+    });
+
+};
+
+MusicPlayerController.prototype.getCatalog = function () {
+
+    view.loadingCatalog();
+
+    var catalog = this.musicPlayer.getCatalog();
+
+    view.displayCatalog(catalog);
+
+};
+
+MusicPlayerController.prototype.proposeTrack = function (trackID, button) {
+
+    button = $(button).parent();
+
+    view.loadingButton(button, false);
+
+    var resp = this.musicPlayer.proposeTrack(trackID, button, function(button) {
+        view.disableButton(button, false);
+    });
+
+    var message;
+
+    if (resp == 1) {
+        message = "Votre chanson a bien été proposée.";
+    }
+    else if (resp == -1) {
+        message = "Cette chanson est déjà présente dans la liste de lecture.";
+    }
+    else {
+        message = resp;
+    }
+
+    view.displayInfoMsg(message);
+
+};
+
+MusicPlayerController.prototype.vote = function (trackID, button) {
+
+    listeVotes.push(parseInt(trackID));
+
+    button = $(button).parent();
+
+    view.loadingButton(button, true);
+
+    var resp = this.musicPlayer.voteTrack(trackID, button, function(button) {
+        view.disableButton(button, true);
+    });
+
+    var message;
+
+    if (resp == 1) {
+        message = "Votre vote a bien été pris en compte.";
+    }
+    else {
+        message = resp;
+    }
+
+    view.displayInfoMsg(message);
+
+};

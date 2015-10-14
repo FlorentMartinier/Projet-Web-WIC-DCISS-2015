@@ -1,0 +1,53 @@
+
+$(document).ready(function() {
+
+    $(".closeModal").click(function() {
+        $("#modal").fadeOut();
+        $("#modalContentSearch").fadeOut();
+        $("#modalContentCatalog").fadeOut();
+    });
+
+    $("#searchArtist").keyup(function() {
+        if ($(this).val().length > 2) {
+            cont.searchTrack($(this).val());
+        }
+    });
+
+    $("#play").click(function() {
+
+        cont.play();
+
+    });
+
+    $("#test").click(function() {
+
+        cont.proposeTrack('76548610');
+    });
+
+    $("#btnSearch").click(function() {
+        $("#modal").fadeIn();
+        $("#modalContentSearch").fadeIn();
+    });
+
+
+    $("#btnCatalog").click(function() {
+
+        $("#modal").fadeIn();
+        $("#modalContentCatalog").fadeIn();
+
+        if ($("#musicCatalog").html() == "") {
+            cont.getCatalog();
+        }
+
+    });
+
+    $(".refreshCatalog").click(function() {
+        cont.getCatalog();
+    });
+
+    DZ.Event.subscribe('player_position', function(pos){
+        view.setProgressBar(pos[0], pos[1]);
+    });
+
+
+});

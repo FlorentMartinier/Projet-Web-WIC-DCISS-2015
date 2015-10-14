@@ -1,0 +1,125 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.5
+-- http://www.phpmyadmin.net
+--
+-- Client: localhost
+-- Généré le: Dim 19 Avril 2015 à 18:37
+-- Version du serveur: 5.5.41-0ubuntu0.14.10.1
+-- Version de PHP: 5.5.12-2ubuntu4.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Base de données: `musicplayer`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `playlists`
+--
+
+CREATE TABLE IF NOT EXISTS `playlists` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `userId` int(255) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `tracks`
+--
+
+CREATE TABLE IF NOT EXISTS `tracks` (
+  `id` int(11) NOT NULL,
+  `titre` text NOT NULL,
+  `artiste` text NOT NULL,
+  `album` text NOT NULL,
+  `cover` text NOT NULL,
+  `preview` text NOT NULL,
+  `genres` text NOT NULL,
+  `releaseDate` text NOT NULL,
+  `duration` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `tracks`
+--
+
+INSERT INTO `tracks` (`id`, `titre`, `artiste`, `album`, `cover`, `preview`, `genres`, `releaseDate`, `duration`) VALUES
+(307143, 'Grind Wit', 'Benighted', 'Icon', 'https://api.deezer.com/artist/10328/image', '', '', '', 200),
+(663451, 'Superstar (feat. Matthew Santos)', 'Lupe Fiasco', 'Lupe Fiasco''s The Cool', 'http://api.deezer.com/album/80476/image', 'http://cdn-preview-b.deezer.com/stream/b9062449c18946d5ea62ee468045af84-5.mp3', 'Hip Hop', '2007-01-01', 291),
+(663452, 'Paris, Tokyo', 'Lupe Fiasco', 'Lupe Fiasco''s The Cool', 'http://api.deezer.com/album/80476/image', 'http://cdn-preview-2.deezer.com/stream/2a501ed4c17a86510dde63a18919ac55-5.mp3', 'Hip Hop', '2007-01-01', 271),
+(1109697, 'Place 54', 'Hocus Pocus', 'Place 54', 'http://api.deezer.com/album/119604/image', 'http://cdn-preview-f.deezer.com/stream/f594df0a57abf1d0eb5161176b06f946-4.mp3', 'Hip Hop', '2007-01-01', 301),
+(1109703, 'Smile', 'Hocus Pocus', 'Place 54', 'http://api.deezer.com/album/119604/image', 'http://cdn-preview-5.deezer.com/stream/5ca9a392708cdde6bcb3f2ae931562ba-4.mp3', 'Hip Hop', '2007-01-01', 202),
+(1109717, 'Vocab!', 'Hocus Pocus', 'Place 54', 'http://api.deezer.com/album/119604/image', 'http://cdn-preview-3.deezer.com/stream/3d9938ccfafdd7a82c46ddd627026ebc-4.mp3', 'Hip Hop', '2007-01-01', 246),
+(1572660, 'Let''s Ride (Album Version Explicit)', 'The Game', 'Doctor''s Advocate', 'http://api.deezer.com/album/161226/image', 'http://cdn-preview-3.deezer.com/stream/3d5bed8f2db3d9640f4f8fb5774e9e82-4.mp3', 'Hip Hop', '2006-01-01', 238),
+(1573232, 'Comment On Faisait ?', 'Hocus Pocus', '73 Touches', 'http://api.deezer.com/album/161293/image', 'http://cdn-preview-9.deezer.com/stream/977c2a706c0058f436d0222ef5d75a98-3.mp3', 'Hip Hop', '2006-12-26', 198),
+(1573241, 'Feel Good', 'Hocus Pocus', '73 Touches', 'http://api.deezer.com/album/161293/image', 'http://cdn-preview-9.deezer.com/stream/9189aee36bcd87163f843d135dfa34c7-3.mp3', 'Hip Hop', '2006-12-26', 207),
+(1573267, 'Hip Hop?', 'Hocus Pocus', '73 Touches', 'http://api.deezer.com/album/161293/image', 'http://cdn-preview-2.deezer.com/stream/2bf086175189c646c6de6d01b8f06db5-3.mp3', 'Hip Hop', '2006-12-26', 262),
+(4586922, 'Westside Story (Album Version Explicit)', 'The Game', 'The Documentary', 'http://api.deezer.com/album/293752/image', 'http://cdn-preview-7.deezer.com/stream/7b97f4c78a4d8c67614d2657ac6bb24b-9.mp3', 'Hip Hop', '2004-01-01', 223),
+(4586923, 'Dreams (Album Version Explicit)', 'The Game', 'The Documentary', 'http://api.deezer.com/album/293752/image', 'http://cdn-preview-f.deezer.com/stream/f1e15e701fad329d95fa0d2c3bb61205-9.mp3', 'Hip Hop', '2004-01-01', 286),
+(4586924, 'Hate It Or Love It (Album Version Explicit)', 'The Game', 'The Documentary', 'http://api.deezer.com/album/293752/image', 'http://cdn-preview-4.deezer.com/stream/4f319530c952fde63ec10d697c1f6ea5-9.mp3', 'Hip Hop', '2004-01-01', 206),
+(4586925, 'Higher (Album Version Explicit)', 'The Game', 'The Documentary', 'http://api.deezer.com/album/293752/image', 'http://cdn-preview-1.deezer.com/stream/15efbc835f3b21973414a4baa819e9f7-9.mp3', 'Hip Hop', '2004-01-01', 245),
+(4586926, 'How We Do (Album Version Explicit)', 'The Game', 'The Documentary', 'http://api.deezer.com/album/293752/image', 'http://cdn-preview-9.deezer.com/stream/987394b49166476627dfd085db92a31f-9.mp3', 'Hip Hop', '2004-01-01', 236),
+(4586929, 'Put You On The Game (Album Version Explicit)', 'The Game', 'The Documentary', 'http://api.deezer.com/album/293752/image', 'http://cdn-preview-6.deezer.com/stream/65570fbe95ca2f12d6753b49bd79d5ea-9.mp3', 'Hip Hop', '2004-01-01', 254),
+(4586930, 'Start From Scratch (Album Version Explicit)', 'The Game', 'The Documentary', 'http://api.deezer.com/album/293752/image', 'http://cdn-preview-7.deezer.com/stream/71c99260e4c650417bcdaaaf1b121f14-9.mp3', 'Hip Hop', '2004-01-01', 247),
+(4586931, 'The Documentary (Album Version Explicit)', 'The Game', 'The Documentary', 'http://api.deezer.com/album/293752/image', 'http://cdn-preview-b.deezer.com/stream/b4ee820bf6f586fdc76167e81a8338f2-9.mp3', 'Hip Hop', '2004-01-01', 251),
+(5422882, 'Beautiful Losers', 'Hocus Pocus', '16 pièces', 'http://api.deezer.com/album/496495/image', 'http://cdn-preview-a.deezer.com/stream/a437081bdce2b30a11542066aa408c47-4.mp3', 'Hip Hop', '2010-03-15', 242),
+(5422884, 'A Mi Chemin', 'Hocus Pocus', '16 pièces', 'http://api.deezer.com/album/496495/image', 'http://cdn-preview-9.deezer.com/stream/9c5510970083889face94d7095b0b9bb-4.mp3', 'Hip Hop', '2010-03-15', 295),
+(5422885, 'Putain De Mélodie', 'Hocus Pocus', '16 pièces', 'http://api.deezer.com/album/496495/image', 'http://cdn-preview-d.deezer.com/stream/d149157e90ee2cf4cd1f82dc92bf340d-4.mp3', 'Hip Hop', '2010-03-15', 203),
+(5422889, 'Equilibre', 'Hocus Pocus', '16 pièces', 'http://api.deezer.com/album/496495/image', 'http://cdn-preview-a.deezer.com/stream/a7fb90ad06d903049728e73c23c4528b-4.mp3', 'Hip Hop', '2010-03-15', 274),
+(61601926, 'Infinite Rotation', 'Obscura', 'Cosmogenesis', 'https://api.deezer.com/artist/983172/image', '', '', '', 200),
+(65367239, 'Between the lines', 'Electro Deluxe featuring 20syl and Ben L''Oncle Soul', 'Play', 'http://api.deezer.com/album/6407310/image', 'http://cdn-preview-4.deezer.com/stream/41182297ad4db49c3346f9a6aae0a3fc-0.mp3', 'Jazz', '2010-10-08', 231),
+(72759959, 'Siblings (20Syl C2C Remix)', 'Gush', 'Siblings - EP', 'http://api.deezer.com/album/7157559/image', 'http://cdn-preview-2.deezer.com/stream/210670ff8f1c638ae1b94ccfca441cc3-0.mp3', 'Alternative', '2013-11-28', 229),
+(74878549, 'Thomas Lawrence', 'Coin Banks feat. Anders, Tab-One & 20Syl', 'Heads', 'http://api.deezer.com/album/7401700/image', 'http://cdn-preview-0.deezer.com/stream/0387fe5a0627782e6003d4b052c1628a-2.mp3', 'Hip Hop, R&B/Soul/Funk', '2014-03-07', 226),
+(78475563, 'Boomerang (Edit)', 'Pigeon John', 'Boomerang', 'http://api.deezer.com/album/7804889/image', 'http://cdn-preview-f.deezer.com/stream/f8e594bf17f662a7d6010670bb2313a7-0.mp3', 'Hip Hop', '2014-05-15', 220),
+(78628654, 'Kodama', '20Syl', 'Motifs', 'http://api.deezer.com/album/7821119/image', 'http://cdn-preview-6.deezer.com/stream/6b3930cbdb4d12e299162e0ec6653206-0.mp3', 'Electro', '2014-06-16', 266),
+(78628655, 'Ongoing Thing', '20Syl', 'Motifs', 'http://api.deezer.com/album/7821119/image', 'http://cdn-preview-5.deezer.com/stream/524e1c259ca9f9c5fae6aa2c005b944c-0.mp3', 'Electro', '2014-06-16', 238),
+(78628656, 'C.Y.D.T.T. (Can you dance to this !?)', '20Syl', 'Motifs', 'http://api.deezer.com/album/7821119/image', 'http://cdn-preview-2.deezer.com/stream/29700270b8e140616df8249e158fd740-0.mp3', 'Electro', '2014-06-16', 250),
+(78628658, 'Voices', '20Syl', 'Motifs', 'http://api.deezer.com/album/7821119/image', 'http://cdn-preview-0.deezer.com/stream/0486f1f91f046abf394587ea6d2e968a-0.mp3', 'Electro', '2014-06-16', 265),
+(87112357, 'Devil (20Syl Remix) [Bonus Track]', 'Electro Deluxe', 'Home (Deluxe Version)', 'http://api.deezer.com/album/8790361/image', 'http://cdn-preview-c.deezer.com/stream/c38c1cf4b90023e3760273487c8f1b63-0.mp3', 'Jazz', '2014-09-15', 236),
+(89575435, 'Kodama', '20Syl', 'Thesoundyouneed, Vol. 1', 'http://api.deezer.com/album/9071129/image', 'http://cdn-preview-6.deezer.com/stream/6ee326364adb207434c70a1083c60eea-2.mp3', 'Electro', '2014-11-16', 266),
+(89697455, 'Kouign Amann', '20Syl', 'La Boulangerie, vol. 3', 'http://api.deezer.com/album/9083615/image', 'http://cdn-preview-3.deezer.com/stream/306a49fd1cf8225a8c8b1e1c99c2db7d-2.mp3', 'Electro', '2014-12-01', 247),
+(93351952, 'Allow Me (feat. Pete Philly, Evidence & 20syl)', 'Shuko', 'For the Love of It', 'http://api.deezer.com/album/9481926/image', 'http://cdn-preview-c.deezer.com/stream/c1657be0b0fc9e113be311cd6623e747-3.mp3', 'Hip Hop', '2015-01-30', 259),
+(98560504, 'Smile', 'Youssoupha', 'Smile', 'http://api.deezer.com/album/10073324/image', 'http://cdn-preview-3.deezer.com/stream/3b504a21094abf6a6feb14482014066f-0.mp3', 'World, France, Hip Hop, Rap français', '2015-04-17', 221);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `tracks_playlists`
+--
+
+CREATE TABLE IF NOT EXISTS `tracks_playlists` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `userId` int(255) NOT NULL,
+  `playlistId` int(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `login` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,0 +1,103 @@
+var ancienDesign;
+var ruban;
+var h3;
+var h2;
+var footer;
+var metal;
+var pasMetal;
+var btnCatalog;
+var btnSearch;
+
+$(document).ready(function() {
+
+    ancienDesign = $.cookie('design');
+
+    ruban = document.getElementsByClassName("ruban");
+    h3 = document.getElementsByTagName("h3");
+    h2 = document.getElementsByTagName("h2");
+    footer = document.getElementsByTagName("footer");
+
+    metal = document.getElementById("metal");
+    pasMetal = document.getElementById("pasMetal");
+    btnCatalog = document.getElementById("btnCatalog");
+	btnSearch = document.getElementById("btnSearch");
+
+    if (ancienDesign == "design2") {
+        design2();
+    }
+    else {
+        design1();
+    }
+
+
+});
+
+
+function design1() {
+
+    document.body.style.backgroundImage = "url('images/background.jpg')";
+
+    for (var i=0; i < ruban.length; i++){
+        ruban[i].style.background="#D2B48C";
+    }
+    for (var i=0; i < h3.length; i++){
+        h3[i].style.fontFamily="call_me_mayberegular";
+        h3[i].style.color="white";
+    }
+    for (var i=0; i < h2.length; i++){
+        h2[i].style.fontFamily="call_me_mayberegular";
+        h2[i].style.color="black";
+    }
+    for (var i=0; i < footer.length; i++){
+        footer[i].style.background="#A0522D";
+    }
+	
+	btnCatalog.style.background="#A0522D";
+	btnSearch.style.background="#A0522D";
+	btnCatalog.onmouseover = function() { btnCatalog.style.background = "#D2B48C"; };
+	btnSearch.onmouseover = function() { btnSearch.style.background = "#D2B48C"; };
+	btnCatalog.onmouseout = function() { btnCatalog.style.background = "#A0522D"; };
+	btnSearch.onmouseout = function() { btnSearch.style.background = "#A0522D"; };
+
+	
+    $.cookie('design', 'design1', {expires:7});
+
+    metal.style.display="inline";
+    pasMetal.style.display="none";
+
+}
+
+function design2() {
+
+    document.body.style.backgroundImage="url('images/metal.jpg')";
+
+    for (var i=0; i<ruban.length; i++){
+        ruban[i].style.background="red";
+    }
+
+    for (var i=0; i<h3.length; i++){
+        h3[i].style.fontFamily="disgusting_behaviorregular";
+        h3[i].style.color="black";
+    }
+
+    for (var i=0; i<h2.length; i++){
+        h2[i].style.fontFamily="disgusting_behaviorregular";
+        h2[i].style.color="red";
+    }
+
+    for (var i=0; i<footer.length; i++){
+        footer[i].style.background="red";
+    }
+    btnCatalog.style.background="#FF0000";
+	btnSearch.style.background="#FF0000";
+	btnCatalog.onmouseover = function() { btnCatalog.style.background = "#FF6347"; };
+	btnSearch.onmouseover = function() { btnSearch.style.background = "#FF6347"; };
+	btnCatalog.onmouseout = function() { btnCatalog.style.background = "#FF0000"; };
+	btnSearch.onmouseout = function() { btnSearch.style.background = "#FF0000"; };
+
+    $.cookie('design', 'design2', { expires:7});
+
+    metal.style.display="none";
+    pasMetal.style.display="inline";
+
+}

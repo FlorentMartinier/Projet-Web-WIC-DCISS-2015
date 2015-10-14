@@ -1,0 +1,230 @@
+var ancienDesign;
+var ruban;
+var h3;
+var h2;
+var footer;
+var metal;
+var autre;
+var pasMetal;
+var btnCatalog;
+var btnSearch;
+
+$(document).ready(function() {
+
+    ancienDesign = $.cookie('design');
+
+    ruban = document.getElementsByClassName("ruban");
+    h3 = document.getElementsByTagName("h3");
+    h2 = document.getElementsByTagName("h2");
+    footer = document.getElementsByTagName("footer");
+
+    metal = document.getElementById("metal");
+    pasMetal = document.getElementById("pasMetal")
+    autre = document.getElementById("autre");
+    btnCatalog = document.getElementById("btnCatalog");
+	btnSearch = document.getElementById("btnSearch");
+
+    if (ancienDesign == "design3") {
+        design3();
+    }
+    else if (ancienDesign == "design2") {
+        design2();
+    }
+    else {
+        design1();
+    }
+
+});
+
+
+function design1() {
+
+    document.body.style.backgroundImage = "url('images/background.jpg')";
+
+    for (var i=0; i < ruban.length; i++){
+        ruban[i].style.background="#D2B48C";
+    }
+    for (var i=0; i < h3.length; i++){
+        h3[i].style.fontFamily="call_me_mayberegular";
+        h3[i].style.color="white";
+    }
+    for (var i=0; i < h2.length; i++){
+        h2[i].style.fontFamily="call_me_mayberegular";
+        h2[i].style.color="black";
+    }
+    for (var i=0; i < footer.length; i++){
+        footer[i].style.background="#A0522D";
+    }
+	
+	btnCatalog.style.background="#A0522D";
+	btnSearch.style.background="#A0522D";
+	btnCatalog.onmouseover = function() { btnCatalog.style.background = "#D2B48C"; };
+	btnSearch.onmouseover = function() { btnSearch.style.background = "#D2B48C"; };
+	btnCatalog.onmouseout = function() { btnCatalog.style.background = "#A0522D"; };
+	btnSearch.onmouseout = function() { btnSearch.style.background = "#A0522D"; };
+
+    undoDesign3();
+	
+    $.cookie('design', 'design1', {expires:7});
+
+    metal.style.display="inline";
+    autre.style.display="inline";
+    pasMetal.style.display="none";
+
+}
+
+function design2() {
+
+    document.body.style.backgroundImage="url('images/metal.jpg')";
+
+    for (var i=0; i<ruban.length; i++){
+        ruban[i].style.background="red";
+    }
+
+    for (var i=0; i<h3.length; i++){
+        h3[i].style.fontFamily="disgusting_behaviorregular";
+        h3[i].style.color="black";
+    }
+
+    for (var i=0; i<h2.length; i++){
+        h2[i].style.fontFamily="disgusting_behaviorregular";
+        h2[i].style.color="red";
+    }
+
+    for (var i=0; i<footer.length; i++){
+        footer[i].style.background="red";
+    }
+    btnCatalog.style.background="#FF0000";
+	btnSearch.style.background="#FF0000";
+	btnCatalog.onmouseover = function() { btnCatalog.style.background = "#FF6347"; };
+	btnSearch.onmouseover = function() { btnSearch.style.background = "#FF6347"; };
+	btnCatalog.onmouseout = function() { btnCatalog.style.background = "#FF0000"; };
+	btnSearch.onmouseout = function() { btnSearch.style.background = "#FF0000"; };
+
+    undoDesign3();
+
+    $.cookie('design', 'design2', { expires:7});
+
+    metal.style.display="none";
+    pasMetal.style.display="inline";
+    autre.style.display="inline";
+
+}
+
+function design3() {
+
+    $("body").css("background","url(\"images/shattered.png\") repeat");
+    $("body").css("color","#334");
+    $("body").css("margin","0");
+
+    $("#player, #playlist, #InfoMsg").css("background","url(\"images/skulls.png\") repeat");
+    $("#player, #playlist, #InfoMsg").css("border","1px solid #a7aab9");
+    $("#player, #playlist, #InfoMsg").css("border-radius","6px");
+
+    $(".fond").hide();
+    $(".titreRub").remove();
+    $("#player").prepend("<div class=\"titreRub\">A l'ecoute actuellement</div>");
+    $("#playlist").prepend("<div class=\"titreRub\">Liste de lecture</div>");
+
+    $(".titreRub").css("width","100%");
+    $(".titreRub").css("margin-top","15px");
+    $(".titreRub").css("margin-bottom","15px");
+    $(".titreRub").css("height","32px");
+    $(".titreRub").css("background-color","#FaFaFd");
+    $(".titreRub").css("border-top","1px solid #c7cad9");
+    $(".titreRub").css("border-bottom","1px solid #c7cad9");
+    $(".titreRub").css("font-variant","small-caps");
+    $(".titreRub").css("font-size","25px");
+    $(".titreRub").css("font-weight","bold");
+    $(".titreRub").css("font-family","Helvetica");
+    $(".titreRub").css("padding-top","2px");
+    $(".titreRub").css("text-align","center");
+
+    $("#title").css("background","url(\"images/office.png\") repeat");
+    $("#title").css("margin-bottom","20px");
+    $("#title").css("border-top","1px solid black");
+    $("#title").css("border-bottom","1px solid black");
+
+    $("#title h2").css("color","#E7E8E8");
+    $("#title h2").css("font-family","roboto");
+    $("#title h2").css("font-variant","small-caps");
+    $("#title h2").css("padding-top","13px");
+    $("#title h2").css("padding-bottom","4px");
+    $("#title h2").css("font-size","42px");
+    $("#title h2").css("text-shadow","1px 1px #B5BCE5");
+
+    $("#title h2 i").css("background-color","#E6E7ED");
+    $("#title h2 i").css("border","1px solid #B5BCE5");
+    $("#title h2 i").css("border","1px solid #B5BCE5");
+    $("#title h2 i").css("color","#1B1B1B");
+    $("#title h2 i").css("padding","2px 5px 0px 5px");
+    $("#title h2 i").css("border-top-left-radius", "14px");
+    $("#title h2 i").css("border-bottom-right-radius", "14px");
+
+    $("#btnCatalog, #btnSearch, .closeModal").css("background-color", "#696F8E")
+    $("#btnCatalog, #btnSearch, .closeModal").css("border", "1px solid #8F95B7");
+    $("#btnCatalog, #btnSearch, .closeModal").css("border-radius", "3px");
+    $("#btnCatalog, #btnSearch, .closeModal").css("box-shadow", "1px 1px 3px #999FbE");
+    $("#btnCatalog, #btnSearch, .closeModal").css("box-shadow", "1px 1px 3px #999FbE");
+
+    btnCatalog.onmouseover = null;
+    btnSearch.onmouseover = null;
+    btnCatalog.onmouseout = null;
+    btnSearch.onmouseout = null;
+
+    $("#btnCatalog, #btnSearch").hover(function() {
+        $(this).css("background-color", "#838AAD");
+    }, function() {
+        $(this).css("background-color", "#696F8E")
+    });
+
+    $("#progressBarInt").css("background-color", "#989EBC");
+
+    $("#modalContentCatalog, #modalContentSearch").css("border-radius", "7px");
+    $("#modalContentCatalog, #modalContentSearch").css("border","1px solid #a7aab9");
+
+    $("#modal h4").css("color", "#334");
+    $("#modal h4").css("margin-left", "20px");
+    $("#modal h4").css("margin-right", "20px");
+    $("#modal h4").css("padding-bottom", "4px");
+    $("#modal h4").css("border-bottom", "1px solid #334");
+    $("#modal h4").css("font-size", "20px");
+
+    $("footer").css("background","url(\"images/office-lt.png\") repeat");
+    $("footer").css("border","none");
+    $("footer").css("border-radius","0");
+    $("footer").css("border-top","1px solid #333");
+    $("footer").css("border-bottom","1px solid #333");
+
+    metal.style.display="inline";
+    pasMetal.style.display="inline";
+    autre.style.display="none";
+
+    $.cookie('design', 'design3', { expires:7});
+
+}
+
+function undoDesign3() {
+
+    $(".fond").show();
+    $(".titreRub").hide();
+
+    $("#player, #playlist").css("background", "white");
+
+    $("#title").css("background","none");
+    $("#title").css("border-bottom","none");
+
+    $("#btnCatalog, #btnSearch").css("border", "1px solid black");
+    $("#btnCatalog, #btnSearch").css("box-shadow", "0px 1px 3px #666666");
+
+    $("#title h2").css("text-shadow","none");
+
+    $("#title h2 i").css("background-color","transparent");
+    $("#title h2 i").css("border","none");
+
+    $("#title h2").css("font-size","50px");
+
+    $("footer").css("border","2px solid #666666");
+    $("footer").css("border-radius","30px");
+
+}

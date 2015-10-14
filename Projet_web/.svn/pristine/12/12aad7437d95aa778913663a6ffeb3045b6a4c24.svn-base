@@ -1,0 +1,38 @@
+var cont =  new MusicPlayerController();
+var view = new MusicPlayerView();
+
+$(document).ready(function() {
+
+
+    //DZ.init({
+    //    appId  : 'YOUR_APP_ID',
+    //    channelUrl : 'http://YOUR_DOMAIN/channel.html',
+    //    player: {
+    //        container: 'dz-player',
+    //        width : 800,
+    //        height : 300
+    //    }
+    //});
+
+    // player invisible
+    DZ.init({
+        appId : '155481',
+        channelUrl : 'http://YOUR_DOMAIN/channel.html',
+        player : {
+            onload : function(){
+                //cont.play();
+            }
+        }
+    });
+
+    // init du contrôleur
+    cont.updatePlaylist();
+
+    // update de la playlist à interval régulier
+    //setInterval(function() {
+    //    cont.updatePlaylist();
+    //}, 2000);
+
+    // cont.play();
+
+});

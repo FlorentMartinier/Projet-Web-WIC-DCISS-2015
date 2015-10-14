@@ -1,0 +1,54 @@
+function MusicPlayerRestClient(){
+
+    var CURRENT_TRACK_URI   = 'http://localhost:3000/playlist/currentTrack';
+    var PROPOSED_TRACKS_URI = 'http://localhost:3000/playlist/proposedTracks';
+    var VOTE_TRACK_URI      = 'http://localhost:3000/playlist/voteTrack';
+    var CATALOG_URI         = 'http://localhost:3000/catalog/';
+
+    this.getCurrentTrack = function() {
+        var currentTrack = this.doRequest('GET', CURRENT_TRACK_URI, null, false);
+        return currentTrack;
+    };
+
+    this.getProposedTracks = function () {
+        var proposedTracks = this.doRequest('GET', PROPOSED_TRACKS_URI, null, false);
+        return proposedTracks;
+    };
+
+    this.proposeTrack = function(trackID, button, callback) {
+        this.doRequest('PUT', PROPOSED_TRACKS_URI + "/" + trackID, null, true, button, callback);
+
+    }
+    
+     this.voteTrack = function(trackID, button, callback) {
+        this.doRequest('PUT', VOTE_TRACK_URI + "/" + trackID, null, true, button, callback);
+    };
+	
+    this.getCatalog = function() {
+        var catalog = this.doRequest('GET', CATALOG_URI, null, true);
+        return catalog;
+    };
+
+    this.doRequest = function(verb, url, data, async, button, callback) {
+
+        var response;
+
+        $.ajax({
+            url:  url,
+            type: verb,
+            async: false,
+            dataType: 'json',
+            success: function(resp) {
+                response = resp;
+                if (callback != null) callback(button);
+            },
+            error: function(xhr) {
+                $("#res").html("Error when " + verb + " " + url + " : " + xhr);
+            }
+        });
+
+        return response;
+
+    }; // method
+
+} // class

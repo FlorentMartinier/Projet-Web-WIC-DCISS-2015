@@ -1,0 +1,182 @@
+
+//Import pour faire fonctionner le service REST avec Node js///////////////////
+
+var express    = require('express');
+var bodyParser = require('body-parser');
+var cors       = require('cors');
+var mysql      = require('mysql');
+var Track      = require('./Track');
+
+
+var app = express();
+app.use(bodyParser.json());
+app.use( cors() );
+
+//var currentTrack   = 76548610;
+var currentTrack   = new Track();
+currentTrack.getInfosFromDZ(76548610, null);
+
+var proposedTracks = [61601926, 11015025, 2152785, 307143];
+var track;
+
+for (var i = 0; i < proposedTracks.length; i++) {
+    track = new Track();
+    track.getInfosFromDZ(proposedTracks[i], null);
+    proposedTracks[i] = track;
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+//Lancement du server node js//
+var server = app.listen(3000, function () {
+    console.log('Listening at http://localhost:%s', server.address().port);
+});
+
+// Credentials pour connexion db mysql !
+var connection = mysql.createConnection({
+        host     : 'localhost',
+        user     : 'root',
+        //password : 'd974bbac',
+        password : 'cegelec11',
+        //password : 'root',
+        database : 'musicplayer'
+ });
+
+connection.connect();
+
+// vérification régulière de la progression de la chanson en cours
+setInterval(function () {
+    //console.log("... " + (i++));
+}, 2000);
+
+
+
+////////////////////////////////  Traitement des appels au service REST  ////////////////////////////////////////////////////////////////////////////
+
+/* Récupération de la piste courante -- GET --- /playlist/proposedTrack */
+app.get('/playlist/currentTrack', function (request, response) {
+
+    console.log("Reçu GET /playlist/currentTrack : " + currentTrack.title);
+    response.json(currentTrack);
+
+});
+
+/* Récupération des pistes proposées -- GET --- /playlist/proposedTrack*/
+app.get('/playlist/proposedTracks', function (request, response) {
+
+    //console.log("Reçu GET /playlist/proposedTracks");
+    response.json(proposedTracks);
+
+});
+
+/* Consultation du catalogue -- GET --- /catalog */
+app.get('/catalog', function (request, response) {
+
+    console.log("Reçu GET /catalog");
+
+    connection.query('SELECT * FROM tracks ORDER BY titre LIMIT 20', function(err, rows, fields) {
+
+        if (err) {
+            console.error(err);
+        }
+        else {
+            response.json(rows);
+        }
+
+    });
+
+});
+
+/* Proposition d'une piste -- PUT --- /playlist/proposedTrack/:idTrack */
+app.put('/playlist/proposedTracks/:idTrack', function (request, response) {
+
+    var idTrack = request.params.idTrack;
+
+    console.log("Reçu PUT /playlist/proposedTracks - Track = " + idTrack);
+
+    var track = new Track();
+
+    var callback = function(track) {
+
+        // si c'est la première piste proposée
+        if (currentTrack == null) {
+            currentTrack = track;
+        }
+        // sinon on l'ajoute à proposedTracks
+        else {
+            proposedTracks.push(track);
+        }
+
+    }
+
+    // si la piste n'est pas déjà dans proposedTracks ou currentTrack
+    var alreadyProposed = false;
+    if (idTrack == currentTrack.id) {
+        alreadyProposed = true;
+    }
+    else {
+        for (var i = 0; i < proposedTracks.length; i++) {
+            if (idTrack == proposedTracks[i].id) {
+                alreadyProposed = true;
+            }
+        }
+    }
+
+    if (!alreadyProposed) {
+
+        track.getInfosFromDB(idTrack, callback);
+
+    }
+
+    response.json('ok');
+
+});
+
+/* Vote pour une musique -- PUT --- /playlist/vote/id */
+app.put('/playlist/voteTrack/:idTrack', function (request, response) {
+
+    var idTrack = request.params.idTrack;
+
+    console.log("Reçu PUT /playlist/vote/ - Track = " +idTrack);
+
+    for (var i = 0; i < proposedTracks.length; i++) {
+
+        // si c'est l'item recherché
+        if (idTrack == proposedTracks[i].id) {
+
+            proposedTracks[i].nbVotes++;
+
+            // on remonte dans le tableau jusqu'à trouver un nb de votes plus important ou égal
+            for (var j = i - 1; j >= 0 && proposedTracks[j].nbVotes < proposedTracks[i].nbVotes; j--) {}
+
+            // on remonte l'item
+            proposedTracks.splice(j + 1, 0, proposedTracks.splice(i, 1)[0]);
+
+        }
+
+    }
+
+    response.json("ok");
+
+});
+
+///* Passage à la musique précédente -- POST --- /playlist/previousTracks */
+//app.get('/playlist/previousTracks', function (request, response) {
+//
+//    console.log("Reçu GET /playlist/previousTracks");
+//    response.json(previousTracks);
+//
+//});
+//
+///*Passage à la musique suivante -- POST --- /playlist/previousTracks */
+//app.post('/playlist/nextTrack', function (request, response) {
+//
+//    console.log("Reçu POST /playlist/nextTrack");
+//
+//    previousTracks.push(currentTrack);
+//    currentTrack = proposedTracks.shift();
+//    response.json(currentTrack);
+//
+//});

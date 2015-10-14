@@ -1,0 +1,84 @@
+function Track() {
+
+    this.id = 0;
+
+    this.title = "";
+    this.artistName = "";
+    this.albumName = "";
+    this.cover = "";
+    this.preview = "";
+    this.genres = "";
+    this.release = "";
+    this.duration = "";
+
+}
+
+Track.prototype.setID = function(id) {
+
+    this.id = id;
+
+};
+
+Track.prototype.setTitle = function(title) {
+
+    this.title = title;
+
+};
+
+Track.prototype.setArtistName = function(artistName) {
+
+    this.artistName = artistName;
+
+};
+
+Track.prototype.setCover = function(cover) {
+
+    this.cover = cover;
+
+};
+
+// comparaison de deux Tracks : deux tracks sont identiques si l'id est identique
+Track.prototype.equals = function(otherTrack) {
+
+    return (otherTrack.id == this.id);
+
+};
+
+Track.prototype.getInfosFromDZ = function(id, current, fuckingCallback1, fuckingCallback2) {
+
+    this.setID(id);
+
+    // récupération des infos sur la piste
+    DZ.api('/track/' + this.id, function(response){
+
+        this.title = response.title;
+        this.artistName = response.artist.name;
+        this.cover = response.album.cover;
+        this.albumName = response.album.title;
+        this.preview = response.preview;
+        this.duration = response.duration;
+
+        fuckingCallback1(this);
+
+        if (current) {
+
+            this.genres = "";
+
+            DZ.api('/album/' + response.album.id, function(response2){
+
+
+                this.release = response2.release_date;
+
+                for (var i = 0; i < response2.genres.data.length; i++) {
+                    this.genres += response2.genres.data[i].name;
+                    if (i < response2.genres.data.length - 1) this.genres += ", ";
+                }
+
+                fuckingCallback2(this);
+
+            });
+        }
+
+    });
+
+};

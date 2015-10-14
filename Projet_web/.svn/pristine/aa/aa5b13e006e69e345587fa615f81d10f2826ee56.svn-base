@@ -1,0 +1,65 @@
+
+$(document).ready(function() {
+
+    $(".closeModal").click(function() {
+        $("#modal").fadeOut();
+        $("#modalContentSearch").fadeOut();
+        $("#modalContentCatalog").fadeOut();
+
+        $("body").css("overflow", "auto");
+    });
+
+    $("#searchArtist").keyup(function() {
+        if ($(this).val().length > 2) {
+            cont.searchTrack($(this).val());
+        }
+    });
+
+    //$("#play").click(function() {
+    //
+    //    cont.play();
+    //
+    //});
+
+    $("#test").click(function() {
+    });
+
+    $("#btnSearch").click(function() {
+
+        window.scrollTo(0, 0);
+
+        $("#modal").fadeIn();
+        $("#modalContentSearch").fadeIn();
+
+        // focus sur le champ de recherche
+        $("#searchArtist").focus();
+
+        $("body").css("overflow", "hidden");
+    });
+
+
+    $("#btnCatalog").click(function() {
+
+        window.scrollTo(0, 0);
+
+        $("#modal").fadeIn();
+        $("#modalContentCatalog").fadeIn();
+        
+        $("body").css("overflow", "hidden");
+
+        if ($("#modalContentCatalog .result").html() == "") {
+            cont.getCatalog();
+        }
+
+    });
+
+    $(".refreshCatalog").click(function() {
+        cont.getCatalog();
+    });
+
+    DZ.Event.subscribe('player_position', function(pos){
+        view.setProgressBar(pos[0], pos[1]);
+    });
+
+
+});

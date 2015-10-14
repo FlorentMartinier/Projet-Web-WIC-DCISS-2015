@@ -1,0 +1,91 @@
+function MusicPlayerController() {
+
+    //this.musicPlayer = new MusicPlayerLocalClient();
+    this.musicPlayer = new MusicPlayerRestClient();
+
+    this.currentTrack   = null;
+    this.proposedTracks = null;
+
+}
+
+MusicPlayerController.prototype.updatePlaylist = function () {
+
+    var newPropTracks = this.musicPlayer.getProposedTracks();
+
+    if (!arePropTracksEqual(newPropTracks, this.proposedTracks)) {
+
+        // affichage de l'image animée de chargement
+        view.loadingTracks();
+
+        this.proposedTracks = newPropTracks;
+        view.refreshProposedTracks(this.proposedTracks);
+
+        this.currentTrack = this.musicPlayer.getCurrentTrack();
+        view.refreshCurrentTrack(this.currentTrack);
+
+    }
+
+    setTimeout(function() {
+        cont.updatePlaylist();
+    }, 1000);
+
+};
+
+MusicPlayerController.prototype.play = function () {
+
+    //DZ.player.setVolume(20);
+
+    var tracks = [cont.currentTrack.id];
+
+    for (var i  = 0; i < cont.proposedTracks.length; i++) {
+        tracks.push(cont.proposedTracks[i].id);
+    }
+
+    DZ.player.playTracks(tracks);
+    DZ.player.play();
+
+};
+
+MusicPlayerController.prototype.searchTrack = function (search) {
+
+    view.loadingSearch();
+
+    DZ.api('/search/track?q=' + search, function(response){
+        view.setSearchResult(response.data);
+    });
+
+};
+
+MusicPlayerController.prototype.proposeTrack = function (trackID, button) {
+
+    button = $(button).parent();
+
+    view.loadingButton(button, false);
+
+    this.musicPlayer.proposeTrack(trackID, button, function(button) {
+        view.disableButton(button, false);
+    });
+
+};
+
+
+MusicPlayerController.prototype.getCatalog = function () {
+
+    var catalog = this.musicPlayer.getCatalog();
+    view.displayCatalog(catalog);
+
+};
+
+MusicPlayerController.prototype.vote = function (trackID, button) {
+
+    listeVotes.push(parseInt(trackID));
+
+    button = $(button).parent();
+
+    view.loadingButton(button, true);
+
+    this.musicPlayer.voteTrack(trackID, button, function(button) {
+        view.disableButton(button, true);
+    });
+
+};

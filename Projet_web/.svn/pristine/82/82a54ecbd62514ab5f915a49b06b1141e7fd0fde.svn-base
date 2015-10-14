@@ -1,0 +1,40 @@
+img{
+	width:50px;
+}
+
+#vide{
+	width:10%;
+	background:red;
+}
+#titre{
+	width:30%;
+	background:red;
+}
+#artiste{
+	width:30%;
+	background:red;
+}
+#album{
+	width:30%;
+	background:red;
+}
+
+#vote{
+	width:70px;
+	background:red;
+}
+
+h1{
+	text-align:center;
+	font-family:fantasy;
+	text-decoration:underline;
+}
+table, th, td{
+	border-style:solid;
+	border-width:medium;
+	text-align: center;
+}
+
+td{
+	font-family:fantasy;
+}

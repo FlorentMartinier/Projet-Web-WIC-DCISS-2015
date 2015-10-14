@@ -1,0 +1,252 @@
+-- phpMyAdmin SQL Dump
+-- version 4.0.5
+-- http://www.phpmyadmin.net
+--
+-- Client: localhost
+-- Généré le: Sam 04 Avril 2015 à 16:12
+-- Version du serveur: 5.5.41-0ubuntu0.14.10.1
+-- Version de PHP: 5.5.12-2ubuntu4.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Base de données: `musicplayer`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `albums`
+--
+
+CREATE TABLE IF NOT EXISTS `albums` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `Title` varchar(100) DEFAULT NULL,
+  `Artist` varchar(100) DEFAULT NULL,
+  `CoverURL` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
+
+--
+-- Contenu de la table `albums`
+--
+
+INSERT INTO `albums` (`ID`, `Title`, `Artist`, `CoverURL`) VALUES
+(10, 'Random Access Memories', 'Daft Punk', 'http://api.deezer.com/album/6575789/image'),
+(11, 'Reflektor', 'Arcade Fire', 'http://api.deezer.com/album/7062033/image'),
+(12, 'The Golden Age', 'Woodkid', 'http://api.deezer.com/album/6415330/image'),
+(13, 'racine carr&eacute;e', 'Stromae', 'http://api.deezer.com/album/6851659/image'),
+(14, 'BLIZZARD', 'FAUVE', 'http://api.deezer.com/album/7197283/image'),
+(15, 'Overgrown', 'James Blake', 'http://api.deezer.com/album/6434576/image'),
+(16, 'Psychic', 'Darkside', 'http://api.deezer.com/album/6982412/image'),
+(17, 'True', 'Avicii', 'http://api.deezer.com/album/6893935/image'),
+(18, 'Black Pearl (He\\''s A Pirate) [feat. Sidney Housen] - EP', 'Rebel', 'http://api.deezer.com/album/7431710/image'),
+(19, 'Pursuit Of Happiness', 'Kid Cudi', 'http://api.deezer.com/album/1706798/image'),
+(20, 'Bad (feat. Vassy) [Radio Edit]', 'David Guetta', 'http://api.deezer.com/album/7589323/image'),
+(21, 'Nothing But the Beat Ultimate', 'David Guetta', 'http://api.deezer.com/album/6168389/image'),
+(22, 'Sex &amp; Violins', 'Rednex', 'http://api.deezer.com/album/78792/image'),
+(23, 'Un monde parfait', 'Ilona Mitrecey', 'http://api.deezer.com/album/660940/image'),
+(24, 'Super F&ecirc;te Vol. 2', 'Generation F&ecirc;te', 'http://api.deezer.com/album/138877/image');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `tracks`
+--
+
+CREATE TABLE IF NOT EXISTS `tracks` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `DeezerID` int(11) NOT NULL,
+  `Title` varchar(100) DEFAULT NULL,
+  `Preview` varchar(100) DEFAULT NULL,
+  `AlbumID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `AlbumID` (`AlbumID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=256 ;
+
+--
+-- Contenu de la table `tracks`
+--
+
+INSERT INTO `tracks` (`ID`, `DeezerID`, `Title`, `Preview`, `AlbumID`) VALUES
+(96, 67238728, 'Give Life Back to Music', 'http://cdn-preview-5.deezer.com/stream/5ee6a64ea769922abeea0549a5c91cbc-5.mp3', 10),
+(97, 67238729, 'The Game of Love', 'http://cdn-preview-2.deezer.com/stream/298178023291c60d0dfb5421b1c9c47f-1.mp3', 10),
+(98, 67238730, 'Giorgio by Moroder', 'http://cdn-preview-c.deezer.com/stream/cf3eae62911ee8f925bbfa79ed2432f2-5.mp3', 10),
+(99, 67238731, 'Within', 'http://cdn-preview-6.deezer.com/stream/6e9d7bfe83dd80afe37a5e8843f447f5-5.mp3', 10),
+(100, 67238732, 'Instant Crush', 'http://cdn-preview-0.deezer.com/stream/0f766b2312d338fd1295df91c869c4e5-5.mp3', 10),
+(101, 67238733, 'Lose Yourself to Dance', 'http://cdn-preview-e.deezer.com/stream/ea91cf77f4cd12ddf499465a8f94c272-5.mp3', 10),
+(102, 67238734, 'Touch', 'http://cdn-preview-8.deezer.com/stream/82c8d9b85e09fce8a624508890b99567-1.mp3', 10),
+(103, 67238735, 'Get Lucky', 'http://cdn-preview-7.deezer.com/stream/783280be6a0859be3f7050408050242e-1.mp3', 10),
+(104, 67238736, 'Beyond', 'http://cdn-preview-d.deezer.com/stream/d84e8400c43a3b8c548ca5ce85f3db3c-1.mp3', 10),
+(105, 67238737, 'Motherboard', 'http://cdn-preview-e.deezer.com/stream/ebab4779e9585c7ebfe830b074be9253-5.mp3', 10),
+(106, 67238738, 'Fragments of Time', 'http://cdn-preview-8.deezer.com/stream/870e7e146329d5abbf161b6606a0cf8b-1.mp3', 10),
+(107, 67238739, 'Doin'' it Right', 'http://cdn-preview-d.deezer.com/stream/def3a5534d10660a450d7bc3df2dafac-5.mp3', 10),
+(108, 67238740, 'Contact', 'http://cdn-preview-b.deezer.com/stream/bd484d548a804ba44c7676092f169eca-1.mp3', 10),
+(109, 71886591, 'Reflektor', 'http://cdn-preview-f.deezer.com/stream/f40ee87a841318b402ae0d1bf9fa2b7d-0.mp3', 11),
+(110, 71886592, 'We Exist', 'http://cdn-preview-1.deezer.com/stream/1c6ac357f484a84080a75ca2ffae3b85-0.mp3', 11),
+(111, 71886593, 'Flashbulb Eyes', 'http://cdn-preview-6.deezer.com/stream/6d380b8617cbcc237b268321eabf6834-0.mp3', 11),
+(112, 71886594, 'Here Comes The Night Time', 'http://cdn-preview-7.deezer.com/stream/736cf0bd1162636bac32c8f0ca66a1ad-0.mp3', 11),
+(113, 71886595, 'Normal Person', 'http://cdn-preview-9.deezer.com/stream/9ec0b22a55b09acf80448110cbe3efc8-0.mp3', 11),
+(114, 71886596, 'You Already Know', 'http://cdn-preview-a.deezer.com/stream/a115c6ea7ab5f54be126a573d8fbf04f-1.mp3', 11),
+(115, 71886597, 'Joan Of Arc', 'http://cdn-preview-0.deezer.com/stream/025f35ec9f05d4cc280172ac4aa81d0d-0.mp3', 11),
+(116, 71886598, 'Here Comes The Night Time II', 'http://cdn-preview-b.deezer.com/stream/bb91491e75329bb3fc4325344f102583-0.mp3', 11),
+(117, 71886599, 'Awful Sound (Oh Eurydice)', 'http://cdn-preview-8.deezer.com/stream/8c654344dec64c19615bf4e6ffa32b1a-0.mp3', 11),
+(118, 71886600, 'It&rsquo;s Never Over (Hey Orpheus)', 'http://cdn-preview-9.deezer.com/stream/91f68ef941d2ec86fe263d2bf76f0183-0.mp3', 11),
+(119, 71886601, 'Porno', 'http://cdn-preview-4.deezer.com/stream/4bbc625492a8ff73058e1926cdb23efd-0.mp3', 11),
+(120, 71886602, 'Afterlife', 'http://cdn-preview-b.deezer.com/stream/b30271148d80d89f24e29b2d2a4ab8af-0.mp3', 11),
+(121, 71886603, 'Supersymmetry', 'http://cdn-preview-4.deezer.com/stream/491d8cc46558059bce258d79bf1a8ee2-0.mp3', 11),
+(122, 65446362, 'The Golden Age', 'http://cdn-preview-d.deezer.com/stream/d242e51d215a0225dba1ccee5e6b1411-0.mp3', 12),
+(123, 65446363, 'Run Boy Run', 'http://cdn-preview-0.deezer.com/stream/037c796b989dabb8e19be6b71c0ba73d-0.mp3', 12),
+(124, 65446364, 'The Great Escape', 'http://cdn-preview-b.deezer.com/stream/bb1fbef3dabb44c470c412f3ac4c35b5-0.mp3', 12),
+(125, 65446365, 'Boat Song', 'http://cdn-preview-a.deezer.com/stream/a7afc8816f3685edcbaeff31f14ed2f3-0.mp3', 12),
+(126, 65446366, 'I Love You', 'http://cdn-preview-5.deezer.com/stream/5ac278090ac4a30e272593ef1bb9189e-0.mp3', 12),
+(127, 65446367, 'The Shore', 'http://cdn-preview-9.deezer.com/stream/90d27dfabfa4f5bde102017a1b022107-0.mp3', 12),
+(128, 65446368, 'Ghost Lights', 'http://cdn-preview-4.deezer.com/stream/459c0a171d182777f105d999cd1226ae-0.mp3', 12),
+(129, 65446369, 'Shadows', 'http://cdn-preview-7.deezer.com/stream/70b42357f45ccdb036ccabe5b3599f18-0.mp3', 12),
+(130, 65446370, 'Stabat Mater', 'http://cdn-preview-e.deezer.com/stream/e368e116187acf673ca6b82fee13977b-0.mp3', 12),
+(131, 65446371, 'Conquest Of Spaces', 'http://cdn-preview-3.deezer.com/stream/395c6b8e9a5d6ece6f9a1304e5adbcc7-0.mp3', 12),
+(132, 65446372, 'Falling', 'http://cdn-preview-4.deezer.com/stream/42c44a89601f3818100a86481a3d39c6-0.mp3', 12),
+(133, 65446373, 'Where I Live', 'http://cdn-preview-0.deezer.com/stream/073a7bd3519112649aa16ee963dc5f65-0.mp3', 12),
+(134, 65446374, 'Iron', 'http://cdn-preview-e.deezer.com/stream/ede28dccff4644687200e6c3fb4a00e6-0.mp3', 12),
+(135, 65446375, 'The Other Side', 'http://cdn-preview-6.deezer.com/stream/6a043c990d9a8cedf1eea99ead04371b-0.mp3', 12),
+(136, 69879249, 'ta f&ecirc;te', 'http://cdn-preview-2.deezer.com/stream/212177fab20097253cf214894966fee1-1.mp3', 13),
+(137, 69879250, 'papaoutai', 'http://cdn-preview-e.deezer.com/stream/e3eee92aff895be39f56714cfb278d49-1.mp3', 13),
+(138, 69879251, 'b&acirc;tard', 'http://cdn-preview-9.deezer.com/stream/993490fb1d727e7d0f6ee3c29f2169be-1.mp3', 13),
+(139, 69879252, 'ave cesaria', 'http://cdn-preview-d.deezer.com/stream/dbdf558f1ad8e08555831378742bb3ae-1.mp3', 13),
+(140, 69879253, 'tous les m&ecirc;mes', 'http://cdn-preview-d.deezer.com/stream/d4ddfaa76a95be56d9d0eba35408a584-1.mp3', 13),
+(141, 69879254, 'formidable', 'http://cdn-preview-4.deezer.com/stream/4040a0798323f3a756c3642830ca2870-1.mp3', 13),
+(142, 69879255, 'moules frites', 'http://cdn-preview-5.deezer.com/stream/55ce5b22a7e6795bdf9034395741ccf8-1.mp3', 13),
+(143, 69879256, 'carmen', 'http://cdn-preview-4.deezer.com/stream/4cb2336b7398605423252419c20bde04-1.mp3', 13),
+(144, 69879257, 'humain &agrave; l''eau', 'http://cdn-preview-8.deezer.com/stream/8a62ce1e45c283febe637446d6816e74-1.mp3', 13),
+(145, 69879258, 'quand c''est ?', 'http://cdn-preview-0.deezer.com/stream/01d58ffeee55db00e2986ea8207390ce-1.mp3', 13),
+(146, 69879259, 'sommeil', 'http://cdn-preview-2.deezer.com/stream/2dd0af54b73cd2b623d19a62675f4bdc-1.mp3', 13),
+(147, 69879260, 'merci', 'http://cdn-preview-7.deezer.com/stream/7898eeb7c1f945ea5403ac4a0d996a96-1.mp3', 13),
+(148, 69879261, 'avf', 'http://cdn-preview-c.deezer.com/stream/ca5cf62a6c1bfd94fb576e8145fb38be-1.mp3', 13),
+(149, 73140591, 'BLIZZARD', 'http://cdn-preview-8.deezer.com/stream/8c9c1ff51b3a0dae3d474f9e863e8f65-0.mp3', 14),
+(150, 73140593, 'COCK MUSIC SMART MUSIC / RAG #1', 'http://cdn-preview-2.deezer.com/stream/2f3e021c38d207dacf9d7912866321f8-0.mp3', 14),
+(151, 73140594, 'NUITS FAUVES', 'http://cdn-preview-6.deezer.com/stream/62430a58a383e11d1a86f943dbf6a58e-0.mp3', 14),
+(152, 73140596, 'HAUT LES COEURS / RAG #2', 'http://cdn-preview-6.deezer.com/stream/6f8646d981ca9dc8971abcd970aaf8a8-0.mp3', 14),
+(153, 73140597, 'KAN&Eacute;', 'http://cdn-preview-e.deezer.com/stream/e6b90f5d17e15c15c4a379ed26da963c-0.mp3', 14),
+(154, 73140599, 'RUB A DUB', 'http://cdn-preview-c.deezer.com/stream/c0ac61c927735cf88c9566d024033d81-0.mp3', 14),
+(155, 65631305, 'Overgrown', 'http://cdn-preview-1.deezer.com/stream/10ade1505bd72875ac4129f6b782d50a-0.mp3', 15),
+(156, 65631306, 'I Am Sold', 'http://cdn-preview-d.deezer.com/stream/df5d67cd7a341cfcfdc3dbd03a1f4509-0.mp3', 15),
+(157, 65631307, 'Life Round Here', 'http://cdn-preview-8.deezer.com/stream/86a1c486800f53fa43d92ecb05bb7811-0.mp3', 15),
+(158, 65631308, 'Take A Fall For Me', 'http://cdn-preview-5.deezer.com/stream/533b1e10ed6fc73dc224e47f27dfcbf7-0.mp3', 15),
+(159, 65631309, 'Retrograde', 'http://cdn-preview-3.deezer.com/stream/32b60c14bfd3f26b4ca8e4697c8e6882-0.mp3', 15),
+(160, 65631310, 'DLM', 'http://cdn-preview-2.deezer.com/stream/25ba62ef11fd66f114f9ff8d83aae2bc-0.mp3', 15),
+(161, 65631311, 'Digital Lion', 'http://cdn-preview-f.deezer.com/stream/f6d48dc8a5dacfdf54d6380347501f00-0.mp3', 15),
+(162, 65631312, 'Voyeur', 'http://cdn-preview-8.deezer.com/stream/8457de77488866b33663ea19b7b263c6-0.mp3', 15),
+(163, 65631313, 'To The Last', 'http://cdn-preview-c.deezer.com/stream/cc683192d1fc496bc57d0f5423e83956-0.mp3', 15),
+(164, 65631314, 'Our Love Comes Back', 'http://cdn-preview-8.deezer.com/stream/8c0c84b795c2590ff76d5dfc514410a8-0.mp3', 15),
+(165, 71125010, 'Golden Arrow', 'http://cdn-preview-a.deezer.com/stream/aa684375730f2aa3906de93a123a34f6-0.mp3', 16),
+(166, 71125011, 'Sitra', 'http://cdn-preview-8.deezer.com/stream/8aac02cb5910372b4d33b34a5a93f590-0.mp3', 16),
+(167, 71125012, 'Heart', 'http://cdn-preview-c.deezer.com/stream/c58eddf9439c858f51286f5d2e7acd23-0.mp3', 16),
+(168, 71125013, 'Paper Trails', 'http://cdn-preview-a.deezer.com/stream/ad4217f55a79cfb5b9a30ddec9902355-0.mp3', 16),
+(169, 71125014, 'The Only Shrine I''ve Seen', 'http://cdn-preview-d.deezer.com/stream/d18b4a3ca13d33fe18ff2605da62ed6e-0.mp3', 16),
+(170, 71125015, 'Freak, Go Home', 'http://cdn-preview-d.deezer.com/stream/daf5f734ccca297bbb5e0f2db2baf073-0.mp3', 16),
+(171, 71125016, 'Greek Light', 'http://cdn-preview-7.deezer.com/stream/704815bb208cb01c96d089cdb00b08b7-0.mp3', 16),
+(172, 71125017, 'Metatron', 'http://cdn-preview-3.deezer.com/stream/3a65dd23345c4c972557986aa98c6b4f-0.mp3', 16),
+(173, 70266756, 'Wake Me Up', 'http://cdn-preview-7.deezer.com/stream/72324fd86cbaca09e09cbfc115257ef1-0.mp3', 17),
+(174, 70266757, 'You Make Me', 'http://cdn-preview-a.deezer.com/stream/ab17cbc99877a2d105c7e3ccf9fd9b3a-0.mp3', 17),
+(175, 70266758, 'Hey Brother', 'http://cdn-preview-5.deezer.com/stream/50d62ecba1063e3bcc380a5787cd46e4-0.mp3', 17),
+(176, 70266759, 'Addicted To You', 'http://cdn-preview-e.deezer.com/stream/edb5a74adba1eb06314eca3186c2462a-0.mp3', 17),
+(177, 70266760, 'Dear Boy', 'http://cdn-preview-6.deezer.com/stream/6fc4855b28eb0c221c0b0f75ae032063-0.mp3', 17),
+(178, 70266761, 'Liar Liar', 'http://cdn-preview-a.deezer.com/stream/aa83b58e2f525072eec5d8a26d2d9b98-0.mp3', 17),
+(179, 70266762, 'Shame On Me', 'http://cdn-preview-3.deezer.com/stream/36c5052b9623390ec4fef57e45e4ce70-0.mp3', 17),
+(180, 70266763, 'Lay Me Down', 'http://cdn-preview-b.deezer.com/stream/ba6c429299a63f2fc95784dd98da72ac-0.mp3', 17),
+(181, 70266764, 'Hope There''s Someone', 'http://cdn-preview-4.deezer.com/stream/4d7bdafbe6d31c7994a7b4de2ad120d7-0.mp3', 17),
+(182, 70266765, 'Heart Upon My Sleeve', 'http://cdn-preview-2.deezer.com/stream/280889dc51438d96e5fd7524ede33277-0.mp3', 17),
+(183, 75139879, 'Black Pearl (He''s A Pirate) [Radio Edit]', 'http://cdn-preview-b.deezer.com/stream/b9b5ec3af50b791eafdad2b0aa1293cd-0.mp3', 18),
+(184, 75139880, 'Black Pearl (He''s A Pirate) [Original Extended Mix]', 'http://cdn-preview-7.deezer.com/stream/7ceaaebc157ce7254f2e27db3f669cbc-0.mp3', 18),
+(185, 18181530, 'Pursuit Of Happiness (Extended Steve Aoki Remix Explicit)', 'http://cdn-preview-6.deezer.com/stream/6d5899394577429d43558f78df68d115-0.mp3', 19),
+(186, 76520669, 'Bad (feat. Vassy) (Radio Edit)', 'http://cdn-preview-b.deezer.com/stream/b75c749a1bd0e9bfbdf729dfa278572f-0.mp3', 20),
+(187, 62847142, 'Titanium (feat. Sia)', 'http://cdn-preview-9.deezer.com/stream/9e7dcdbd3cc9895f605a721fe3afd95c-2.mp3', 21),
+(188, 62847143, 'Turn Me On (feat. Nicki Minaj)', 'http://cdn-preview-3.deezer.com/stream/38b6d3e078a4ef4eae8456785ea12297-2.mp3', 21),
+(189, 62847144, 'She Wolf (Falling to Pieces) [feat. Sia]', 'http://cdn-preview-a.deezer.com/stream/a319b6d9db783e2a480661a7e477af1f-2.mp3', 21),
+(190, 62847145, 'Without You (feat. Usher)', 'http://cdn-preview-4.deezer.com/stream/40b7b9ad8edd847c2317de7c45493013-2.mp3', 21),
+(191, 62847146, 'I Can Only Imagine (feat. Chris Brown &amp; Lil Wayne)', 'http://cdn-preview-0.deezer.com/stream/093991934c6354e5c5f7af36765bba01-2.mp3', 21),
+(192, 62847147, 'Play Hard (feat. Ne-Yo &amp; Akon)', 'http://cdn-preview-9.deezer.com/stream/92567dfb15c9520392eebd3f42b0c281-2.mp3', 21),
+(193, 67102111, 'Wild One Two (feat. David Guetta, Nicky Romero &amp; Sia)', 'http://cdn-preview-1.deezer.com/stream/1163df481fb4687ad64495b65550a4fd-1.mp3', 21),
+(194, 62847148, 'Just One Last Time (feat. Taped Rai)', 'http://cdn-preview-1.deezer.com/stream/141d3abca44b4fa50d16de5d3a4bc065-2.mp3', 21),
+(195, 62847149, 'In My Head (feat. Nervo)', 'http://cdn-preview-e.deezer.com/stream/e44cbb653cb7e227230f0f77218efc62-2.mp3', 21),
+(196, 62847150, 'Where Them Girls At (feat. Nicki Minaj &amp; Flo Rida)', 'http://cdn-preview-8.deezer.com/stream/86efd2e62cf23b816856c1bd25ce41be-2.mp3', 21),
+(197, 62847151, 'Little Bad Girl (feat. Taio Cruz &amp; Ludacris)', 'http://cdn-preview-0.deezer.com/stream/076cb57da7c3d1585d29a1b857c145ac-2.mp3', 21),
+(198, 67102112, 'Sweat (Snoop Dogg vs. David Guetta) (David Guetta Remix)', 'http://cdn-preview-8.deezer.com/stream/85f128566735dee90b4400aa5ba105b0-1.mp3', 21),
+(199, 62847152, 'Crank It Up (feat. Akon)', 'http://cdn-preview-3.deezer.com/stream/354b766bafe072af5605c38ceac0b215-2.mp3', 21),
+(200, 62847153, 'Nothing Really Matters (feat. will.i.am)', 'http://cdn-preview-a.deezer.com/stream/a41507ef29b3a7c1df6a0b552f0a7483-2.mp3', 21),
+(201, 62847154, 'I Just Wanna F. (feat. Timbaland &amp; Dev)', 'http://cdn-preview-9.deezer.com/stream/9e864d0e9f1c2a3518ea22136d2ee790-2.mp3', 21),
+(202, 62847155, 'Night Of Your Life (feat. Jennifer Hudson)', 'http://cdn-preview-e.deezer.com/stream/eef90d19cc8de0e62b07358cf967c7bc-2.mp3', 21),
+(203, 62847156, 'Repeat (feat. Jessie J)', 'http://cdn-preview-2.deezer.com/stream/2e279f67427ba7971f6cac8a5b8d22db-2.mp3', 21),
+(204, 62847157, 'Every Chance We Get We Run (feat. Tegan &amp; Sara)', 'http://cdn-preview-7.deezer.com/stream/717de38c845b1671959941b12c8b754f-2.mp3', 21),
+(205, 62847158, 'Sunshine', 'http://cdn-preview-a.deezer.com/stream/aa7581dcb1623bdde91cd0b9119ccfb7-2.mp3', 21),
+(206, 62847159, 'Lunar', 'http://cdn-preview-0.deezer.com/stream/090843825eb10b253c98a5ff5dc6534e-2.mp3', 21),
+(207, 62847160, 'What the F***', 'http://cdn-preview-1.deezer.com/stream/175e78d7a07595a2356bfb34bf4d7b37-2.mp3', 21),
+(208, 62847161, 'Metropolis', 'http://cdn-preview-7.deezer.com/stream/7b49c34b81524b4db6afaf8fee930032-2.mp3', 21),
+(209, 62847162, 'The Alphabeat', 'http://cdn-preview-f.deezer.com/stream/fd7ca33ebe32c0f3bb609089694bff1a-2.mp3', 21),
+(210, 62847163, 'Metro Music', 'http://cdn-preview-b.deezer.com/stream/b57b3aab86670615d5a3594867034318-2.mp3', 21),
+(211, 62847164, 'Toy Story', 'http://cdn-preview-5.deezer.com/stream/5c7ab30f5b8db27f4d67a94154460440-2.mp3', 21),
+(212, 62847165, 'The Future', 'http://cdn-preview-8.deezer.com/stream/8997006a0d643dd7ae098682060d5a7b-2.mp3', 21),
+(213, 62847166, 'Dreams', 'http://cdn-preview-4.deezer.com/stream/4aca855e3513d1ceb26bca4eb9a180f9-2.mp3', 21),
+(214, 62847167, 'Paris', 'http://cdn-preview-c.deezer.com/stream/caaf7a1a5e9e1a96efe3eda913cdda80-2.mp3', 21),
+(215, 62847168, 'Glasgow', 'http://cdn-preview-0.deezer.com/stream/0c01d3ccac1dff554078fe6c51999c7c-2.mp3', 21),
+(216, 630701, 'Cotton Eye Joe', 'http://cdn-preview-b.deezer.com/stream/b30fd1d9ddc85894cbeb6eaadaaf62c3-2.mp3', 22),
+(217, 630702, 'Hittin'' The Hay', 'http://cdn-preview-e.deezer.com/stream/e13b8854c384ca781f09c1540074ee5c-2.mp3', 22),
+(218, 630703, 'Riding Alone', 'http://cdn-preview-f.deezer.com/stream/f6970ae3b187c341798f4c8a6b39c70a-2.mp3', 22),
+(219, 630705, 'Wish You Were Here', 'http://cdn-preview-b.deezer.com/stream/be76aeed0a77d2076f41c8cc419bfe55-2.mp3', 22),
+(220, 630706, 'Mary Lou', 'http://cdn-preview-3.deezer.com/stream/318c9daaeb002b4c8b53557a9fd13701-2.mp3', 22),
+(221, 630707, 'Old Pop In An Oak (Original Radio Edit)', 'http://cdn-preview-4.deezer.com/stream/4209060a6fc4e49f7d612d150a40ac33-2.mp3', 22),
+(222, 630709, 'Nowhere In Idaho', 'http://cdn-preview-f.deezer.com/stream/fadece1dc149bab6f68631543011bb83-2.mp3', 22),
+(223, 630710, 'Harder Than Your Husband', 'http://cdn-preview-6.deezer.com/stream/620a292b1a1d82ae06f3d703e30ef2f2-2.mp3', 22),
+(224, 630711, 'Fat Sallie Lee', 'http://cdn-preview-e.deezer.com/stream/e6e52c8a355a29be5778c4640d009bb2-2.mp3', 22),
+(225, 630712, 'Shooter', 'http://cdn-preview-9.deezer.com/stream/9afe104e1bb14f6adb2608d99863234b-2.mp3', 22),
+(226, 630714, 'McKenzie Brothers', 'http://cdn-preview-2.deezer.com/stream/25af4435aa3ebba5f8d2b3ba770f0c39-2.mp3', 22),
+(227, 630715, 'Rolling Home', 'http://cdn-preview-c.deezer.com/stream/ce9d3d0b423c1000a1e54d578182f7b2-2.mp3', 22),
+(228, 630716, 'Wild ''N'' Free', 'http://cdn-preview-5.deezer.com/stream/56ac3794ac9ad9ddb6e07bdb60480237-2.mp3', 22),
+(229, 7165122, 'Un monde parfait (Version originale)', 'http://cdn-preview-1.deezer.com/stream/131cbcf8159547a9ba4c18749af9b4f9-1.mp3', 23),
+(230, 7165123, 'C''est les vacances (Version originale)', 'http://cdn-preview-6.deezer.com/stream/6b54f35b70a7f84d1a2d1d63a2e42c36-1.mp3', 23),
+(231, 7165124, 'Dans ma fus&eacute;e (Version originale)', 'http://cdn-preview-d.deezer.com/stream/d37fe54fd3d3fb3f338219c27c732786-1.mp3', 23),
+(232, 7165125, 'No&euml;l que du bonheur', 'http://cdn-preview-8.deezer.com/stream/8f74110fe9b15f1912158de6c067d553-1.mp3', 23),
+(233, 7165126, 'Retourner &agrave; l''&eacute;cole', 'http://cdn-preview-5.deezer.com/stream/5ab6c98286c5ae53adf33b220ac6e13b-1.mp3', 23),
+(234, 7165127, 'All&ocirc; all&ocirc;', 'http://cdn-preview-8.deezer.com/stream/87f78904516e787b9be2bc563b22dff1-1.mp3', 23),
+(235, 7165128, 'My Saxophone (feat. Mailis)', 'http://cdn-preview-1.deezer.com/stream/1654740a29774828abf3de1b09c57045-1.mp3', 23),
+(236, 7165129, 'MDR', 'http://cdn-preview-2.deezer.com/stream/25bce63c90d375c2c1f6e8792cc06f91-1.mp3', 23),
+(237, 7165130, 'Sports d''hiver', 'http://cdn-preview-f.deezer.com/stream/f19f0a127de31aaf2220973a033afd22-1.mp3', 23),
+(238, 7165131, 'Bye bye coll&egrave;ge', 'http://cdn-preview-1.deezer.com/stream/1457bd67910c0a7d4477e8aa98368e99-1.mp3', 23),
+(239, 7165132, 'C''est la f&ecirc;te', 'http://cdn-preview-f.deezer.com/stream/f1e73d189416c17c8217bdaac86041cb-1.mp3', 23),
+(240, 7165133, 'Arrideverci &agrave; bient&ocirc;t', 'http://cdn-preview-b.deezer.com/stream/bd4b4de139e4b7da1795605653385b9e-1.mp3', 23),
+(241, 1344906, 'Maldon ', 'http://cdn-preview-8.deezer.com/stream/89b142dab0e9df00cad4442bb3af7ff1-2.mp3', 24),
+(242, 1344911, 'Les Sunlights Des Tropiques', 'http://cdn-preview-0.deezer.com/stream/00ad0f7119b39f6159b28c81bcd9cf7f-2.mp3', 24),
+(243, 1344915, 'La Danse D''H&eacute;l&egrave;ne', 'http://cdn-preview-4.deezer.com/stream/4bc80e38c4e64c651be438e203dba130-2.mp3', 24),
+(244, 1344921, 'Darla Dirladada', 'http://cdn-preview-9.deezer.com/stream/9e1f9a19230175a6d130208a3a987357-2.mp3', 24),
+(245, 1344925, 'J''Ai Bien Mang&eacute; J''Ai Bien Bu', 'http://cdn-preview-c.deezer.com/stream/c50c8abc88727df96e0b5a2bd836db5a-2.mp3', 24),
+(246, 1344929, 'Celim&egrave;ne', 'http://cdn-preview-e.deezer.com/stream/e29660e63b0dce1b3a0d23ac177e51d7-2.mp3', 24),
+(247, 1344934, 'Il Est Vraiment Ph&eacute;nom&eacute;nal', 'http://cdn-preview-b.deezer.com/stream/b3e21bd1c890056bccadd3b8363d4a18-2.mp3', 24),
+(248, 1344939, 'C''Est Bon Pour Le Moral', 'http://cdn-preview-9.deezer.com/stream/94381136fad2fc4abae95d97d3ef16fb-2.mp3', 24),
+(249, 1344944, 'Lambada', 'http://cdn-preview-c.deezer.com/stream/c9916e3455c73d56145b0142382d41df-2.mp3', 24),
+(250, 1344947, 'Tic, Tic, Tac', 'http://cdn-preview-d.deezer.com/stream/d8c185b568bf6e05807d07053c58f9f6-2.mp3', 24),
+(251, 1344953, 'Un Dos Tres (Maria)', 'http://cdn-preview-7.deezer.com/stream/75091f756a98c27a4bd8a04cd328abb2-2.mp3', 24),
+(252, 1344959, 'Ali Baba', 'http://cdn-preview-c.deezer.com/stream/c36751dae76a18e5c0fc574e6bf51ec7-2.mp3', 24),
+(253, 1344963, 'Faire La F&ecirc;te', 'http://cdn-preview-9.deezer.com/stream/9ade8910189c8ccfc18a966663b66e3b-2.mp3', 24),
+(254, 1344969, 'Ritmo De La Noche', 'http://cdn-preview-2.deezer.com/stream/2dc5168d0e93bb4cabd90d2c65b9d954-2.mp3', 24),
+(255, 1344977, 'Soca Dance', 'http://cdn-preview-2.deezer.com/stream/2b269ba3e469598d1d49586205f6620d-2.mp3', 24);
+
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `tracks`
+--
+ALTER TABLE `tracks`
+  ADD CONSTRAINT `tracks_ibfk_1` FOREIGN KEY (`AlbumID`) REFERENCES `albums` (`ID`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,0 +1,113 @@
+function MusicPlayerView() {
+
+    this.refreshCurrentTrack = function(track) {
+
+        $("#currentTrack .loading").hide();
+
+        $("#currentTrack #CTCover").html("<img class=\"cover\" src=\"" + track.cover + "\" />");
+        $("#currentTrack #CTArtistName").html(track.artistName);
+        $("#currentTrack #CTTitle").html(track.title);
+        $("#currentTrack #CTAlbumName").html(" Album : " + track.albumName);
+
+        $("#currentTrack #CTRelease").html("(" + track.release + ")");
+        $("#currentTrack #CTGenre").html("Genre : " + track.genres);
+
+    }
+
+    this.endLoadProposedTrack = function() {
+
+        $("#playlist #proposedTracks").fadeIn(200);
+        $("#playlist .loading").hide();
+
+    }
+
+    this.refreshProposedTracks = function(tracks) {
+
+        $("#proposedTracks").html("<table><tr><th></th><th>Artiste (album)</th><th>Titre</th><th>Nb votes</th><th>Voter</th></tr></table>");
+
+        for (var i = 0; i < tracks.length; i++) {
+
+            $("#proposedTracks table").append(
+            "<tr>" +
+                "<td><img class=\"cover\" src=\"" + tracks[i].cover + "\" /></td>" +
+                "<td>" + tracks[i].artistName + " (" + tracks[i].albumName + ") </td>" +
+                "<td> " + tracks[i].title + "</td>" +
+                "<td> " + tracks[i].nbVotes + "</td>" +
+                "<td><i onClick=\"cont.vote(" + tracks[i].id + ");\" style=\"width:25px;cursor:pointer;\" class=\"fa fa-thumbs-o-up fa-2x\"></i></td>" +
+                
+            "</tr>");
+
+        }
+
+        view.endLoadProposedTrack();
+
+    }
+
+    this.loadingTracks = function() {
+
+        $("#currentTrack .loading").show();
+        $("#playlist .loading").show();
+        $("#playlist #proposedTracks").fadeOut(200);
+
+    }
+
+    this.loadingSearch = function() {
+
+        $("#modalContentSearch .loading").show();
+        $("#modalContentSearch #result").hide();
+
+    }
+
+    this.setProgressBar = function(pos, tot) {
+
+        pos = Math.trunc(pos);
+
+        var minPos = Math.trunc(pos/60);
+        var secPos = pos - (minPos*60);
+
+        var minTot = Math.trunc(tot/60);
+        var secTot = tot - (minTot*60);
+
+        $("#progressBarInfo").html(("0" + minPos).slice(-2) + ":" + ("0" + secPos).slice(-2) + " / " + ("0" + minTot).slice(-2) + ":" + ("0" + secTot).slice(-2));
+        $("#progressBarInt").css("width", + pos/tot*100 + "%");
+
+    }
+
+    this.setSearchResult = function(tracks) {
+
+        $("#modalContentSearch #result").html("<table>");
+
+        for (var i = 0; i < tracks.length; i++) {
+
+            $("#modalContentSearch #result").append("<tr>");
+            $("#modalContentSearch #result").append("<td>" + tracks[i].artist.name + " - " + tracks[i].title + "</td>");
+            $("#modalContentSearch #result").append("<td><span class=\"addButton\"><i onClick=\"cont.proposeTrack('" + tracks[i].id + "');\" class=\"fa fa-plus fa-lg\"></i></span></td>");
+            $("#modalContentSearch #result").append("</tr>");
+
+        }
+
+        $("#modalContentSearch #result").append("</table>");
+
+        $("#modalContentSearch .loading").hide();
+        $("#modalContentSearch #result").fadeIn(300);
+
+    }
+
+    this.displayCatalog = function(catalog) {
+
+        $("#musicCatalog").html("<table>");
+
+        for (var i = 0; i < catalog.length; i++){
+
+            $("#musicCatalog").append("<tr>");
+            $("#musicCatalog").append("<td>" + catalog[i].artiste + " - " +  catalog[i].titre + "</td>");
+            $("#musicCatalog").append("<td><span class=\"addButton\"><i onClick=\"cont.proposeTrack('" + catalog[i].id + "');\" class=\"fa fa-plus fa-lg\"></i></span></td>");
+            $("#musicCatalog").append("</tr>");
+
+        }
+
+        $("#musicCatalog").append("</table>");
+
+    }
+
+}

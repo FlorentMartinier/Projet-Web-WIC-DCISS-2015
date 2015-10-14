@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr-FR" lang="fr-FR">
+
+    <head>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="icon" type="image/png" href="images/favicon.ico"/>
+
+        <script src="scripts/lib/jquery.min.js"></script>
+        <script src="scripts/lib/jquery-ui.min.js"></script>
+        <script src="scripts/lib/jquery.cookie.js"></script>
+        <script src="scripts/lib/jquery.color-2.1.2.min.js"></script>
+        <script src="scripts/lib/dz.js"></script>
+
+        <script src="scripts/MusicPlayerRestClient.js"></script>
+        <script src="scripts/MusicPlayerView.js"></script>
+        <script src="scripts/MusicPlayerController.js"></script>
+        <script src="scripts/init.js"></script>
+        <script src="scripts/events.js"></script>
+        <script src="scripts/misc.js"></script>
+        <script src="scripts/switchStyle.js"></script>
+
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+        <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/jquery-ui.css">
+
+
+        <title id="titre">Projet Music Player</title>
+
+    </head>
+    <body>
+
+        <div id="modal">
+
+            <div id="modalContentCatalog">
+                <div class="closeModal">Fermer</div>
+                <div class="refreshCatalog"><i class="fa fa-refresh fa-2x"></i></div>
+                <h4>Ajouter une musique du catalogue</h4>
+
+                <div class="loading"><i style="font-size: 80px; margin-top: 100px" class="fa fa-spinner fa-pulse"></i></div>
+
+                <div class="result"></div>
+                <div class="emptyMessage"></div>
+            </div>
+
+            <div id="modalContentSearch">
+
+                <div class="closeModal">Fermer</div>
+                <h4>Chercher une musique hors catalogue</h4>
+
+                <p class="center">
+                    <i class="iconSearchArtist fa-lg fa fa-search"></i> <input type="text" value="" placeHolder="Entrez un nom d'artiste ou de chanson" id="searchArtist" />
+                </p>
+
+                <div class="loading"><i style="font-size: 80px; margin-top: 100px" class="fa fa-spinner fa-pulse"></i></div>
+
+                <div class="result"></div>
+                <div class="emptyMessage"></div>
+
+            </div>
+
+        </div>
+
+        <div id="InfoMsg">
+            <h4><i class="fa fa-info-circle"></i> Information</h4>
+            <p id="info"></p>
+        </div>
+
+        <div id="title"><h2><i class="fa fa-headphones"></i> Projet Music Player Master IC2A 2015</h2></div>
+
+        <div id="test"></div>
+        <div id="res"></div>
+
+        <div id="dz-root"></div>
+        <div id="dz-player" align="center"></div>
+
+        <div id="player">
+
+            <div class="fond">
+                <div class="ruban">
+                    <h3>A l'ecoute actuellement</h3>
+                </div>
+                <div class="ruban_gauche"></div>
+                <div class="ruban_droit"></div>
+            </div>
+
+            <!--<div style="font-weight: bold; cursor: pointer; text-align: center; font-size: 60px" id="play"><i class="fa fa-play-circle"></i></div>-->
+
+            <div id="currentTrack">
+
+                <div class="loading"><i class="fa fa-spinner fa-pulse fa-3x"></i></div>
+
+                <span id="idCurrentTrack">init</span>
+
+                <table>
+                    <tr>
+                        <td rowspan="3" id="CTCover"></td>
+                        <td id="CTArtistName"></td>
+                        <td class="tdVolume" rowspan="3">
+                            <div id="sliderVolume"></div>
+                            <div id="iconeVolume"><i class="fa fa-volume-down fa-2x"></i></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="CTTitle"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                           <span id="CTAlbumName"></span>&nbsp;<span id="CTRelease"></span>
+                            <br />
+                            <span id="CTGenre"></span>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <div id="progressBar"><div id="progressBarInfo"></div><div id="progressBarInt"></div></div>
+
+        </div>
+
+        <!--<div id="dz-player">-->
+
+        <!--</div>-->
+
+        <div id="playListBtn">
+            <span id="btnCatalog">Catalogue</span>
+            <span id="btnSearch">Chercher une chanson</span>
+        </div>
+
+        <div id="playlist">
+
+            <div class="fond">
+                <div class="ruban">
+                    <h3>Liste de lecture</h3>
+                </div>
+                <div class="ruban_gauche"></div>
+                <div class="ruban_droit"></div>
+            </div>
+
+            <div class="loading"><i style="font-size: 80px" class="fa fa-spinner fa-pulse"></i></div>
+
+            <div id="proposedTracks">
+                <table class="tabListChansons"><tr><th></th><th>Artiste</th><th>Titre</th><th class="tdDuree">Durée</th><th class="tdVotes">Votes</th><th class="tdVoter">Voter</th></tr></table>
+            </div>
+
+        </div>
+        
+        <footer>
+
+            <p>Dimitri SCOLE, Pierre-Yves BERGER-SABBATEL, Florent MARTINIER: étudiants Master IC2A 2015</p>
+
+            <span id="metal"><input type=button name='test' value="un peu de piquant ?" onClick="design2()"/></span>
+            <span id="autre"><input type=button name='test' value="autre ?" onClick="design3()"/></span>
+            <span id="pasMetal"><input type=button name='test2' value="un peu moins piquant ?" onClick="design1()" /></span>
+
+        </footer>
+
+    </body>
+
+</html>

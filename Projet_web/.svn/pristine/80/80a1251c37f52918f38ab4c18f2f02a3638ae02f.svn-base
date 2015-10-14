@@ -1,0 +1,65 @@
+var cont =  new MusicPlayerController();
+var view = new MusicPlayerView();
+
+var listeVotes = [];
+
+$(document).ready(function() {
+
+
+    //DZ.init({
+    //    appId  : 'YOUR_APP_ID',
+    //    channelUrl : 'http://YOUR_DOMAIN/channel.html',
+    //    player: {
+    //        container: 'dz-player',
+    //        width : 800,
+    //        height : 300
+    //    }
+    //});
+
+    var startVolume = $.cookie('volume');
+
+    if (startVolume == null) {
+        startVolume = 75;
+    }
+
+    $("#sliderVolume").slider({
+        orientation: "vertical",
+        value: startVolume,
+        min: 0,
+        max: 100,
+        change: function(event, ui ) {
+
+            $.cookie('volume', ui.value);
+
+            if (ui.value < 33) {
+                $("#iconeVolume").html('<i class="fa fa-volume-off fa-2x"></i>');
+            }
+            else if (ui.value < 66) {
+                $("#iconeVolume").html('<i class="fa fa-volume-down fa-2x"></i>');
+            }
+            else {
+                $("#iconeVolume").html('<i class="fa fa-volume-up fa-2x"></i>');
+            }
+
+            DZ.player.setVolume(ui.value);
+
+        }
+    });
+
+    // player invisible
+    DZ.init({
+        appId : '155481',
+        channelUrl : 'http://YOUR_DOMAIN/channel.html',
+        player : {
+            onload : function(){
+                DZ.player.setVolume(startVolume);
+
+                // init du contrôleur
+                cont.updatePlaylist();
+
+                cont.play();
+            }
+        }
+    });
+
+});

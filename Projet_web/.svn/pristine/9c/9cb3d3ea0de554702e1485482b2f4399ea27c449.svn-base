@@ -1,0 +1,58 @@
+function metal(){
+    var ancienDesign = $.cookie('design');
+    var ruban = document.getElementsByClassName("ruban");
+    var h3=document.getElementsByTagName("h3");
+    var h2=document.getElementsByTagName("h2");
+    var footer=document.getElementsByTagName("footer");
+    //var bouton=document.getElementsByID("btnCatalog");
+    //var search=document.getElementsByID("btnSearch");
+    //alert(h3[0].style.color);
+    if (ancienDesign=='fille'){
+        document.body.style.backgroundImage="url('images/background.jpg')";
+        for (var i=0; i<ruban.length; i++){
+            ruban[i].style.background="#D2B48C";
+        }
+        for (var i=0; i<h3.length; i++){
+            h3[i].style.fontFamily="call_me_mayberegular";
+            h3[i].style.color="white";
+        }
+        for (var i=0; i<h2.length; i++){
+            h2[i].style.fontFamily="call_me_mayberegular";
+            h2[i].style.color="black";
+        }
+        for (var i=0; i<footer.length; i++){
+            footer[i].style.background="#3cb0fd";
+        }
+        $.cookie('design', 'garçon', {expires:7});
+    }
+    else {
+        document.body.style.backgroundImage="url('images/metal.jpg')";
+        for (var i=0; i<ruban.length; i++){
+            ruban[i].style.background="red";
+        }
+        for (var i=0; i<h3.length; i++){
+            h3[i].style.fontFamily="disgusting_behaviorregular";
+            h3[i].style.color="black";
+        }
+        for (var i=0; i<h2.length; i++){
+            h2[i].style.fontFamily="disgusting_behaviorregular";
+            h2[i].style.color="red";
+        }
+        for (var i=0; i<footer.length; i++){
+            footer[i].style.background="red";
+        }
+        $.cookie('design', 'fille', { expires:7});
+    }
+}
+$("#switchStyle").click(function() {
+    /*var ancienDesign = $cookie('design');
+     if (ancienDesign == 'red') {
+     $("#footer").css("background-color:#FE2EC8");
+     $("#btnCatalog").css("background-color:#FE2EC8");
+     $("#btnSearch").css("background-color:#FE2EC8");
+     } else {*/
+    $("#footer").css("background-color:#FE2EC8");
+    $("#btnCatalog").css("background-color:#FE2EC8");
+    $("#btnSearch").css("background-color:#FE2EC8");
+    //}
+});

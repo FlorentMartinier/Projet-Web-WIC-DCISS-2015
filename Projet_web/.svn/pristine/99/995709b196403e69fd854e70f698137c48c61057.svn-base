@@ -1,0 +1,64 @@
+function MusicPlayerRestClient(){
+
+    var CURRENT_TRACK_URI   = 'http://localhost:3000/playlist/currentTrack';
+    var PROPOSED_TRACKS_URI = 'http://localhost:3000/playlist/proposedTracks';
+    var PREVIOUS_TRACKS_URI = 'http://localhost:3000/playlist/previousTracks';
+    var NEXT_TRACK_URI      = 'http://localhost:3000/playlist/nextTrack';
+    var VOTE_TRACK_URI      = 'http://localhost:3000/playlist/voteTrack';
+    var CATALOG_URI = 'http://localhost:3000/catalog/';
+
+    this.getCurrentTrack = function() {
+        var currentTrack = this.doRequest('GET', CURRENT_TRACK_URI, null, false);
+        return currentTrack;
+    };
+
+    this.getProposedTracks = function () {
+        var proposedTracks = this.doRequest('GET', PROPOSED_TRACKS_URI, null, false);
+        return proposedTracks;
+    };
+
+    //this.getPreviousTracks = function() {
+    //    var previousTracks = this.doRequest('GET', PREVIOUS_TRACKS_URI, null, false);
+    //    return previousTracks;
+    //};
+
+    //this.getNextTrack = function() {
+    //    var nextTrack = this.doRequest('POST', NEXT_TRACK_URI, null, false);
+    //    return nextTrack;
+    //};
+
+    this.proposeTrack = function(trackID) {
+        this.doRequest('PUT', PROPOSED_TRACKS_URI + "/" + trackID, null, true);
+    }
+    
+     this.voteTrack = function(trackID) {
+        this.doRequest('PUT', VOTE_TRACK_URI + "/" + trackID, null, true);
+    };
+	
+    this.getCatalog = function() {
+        var catalog = this.doRequest('GET', CATALOG_URI, null, false);
+        return catalog;
+    };
+
+    this.doRequest = function(verb, url, data, async) {
+
+        var response;
+
+        $.ajax({
+            url:  url,
+            type: verb,
+            async: false,
+            dataType: 'json',
+            success: function(resp) {
+                response = resp;
+            },
+            error: function(xhr) {
+                $("#res").html("Error when " + verb + " " + url + " : " + xhr);
+            }
+        });
+
+        return response;
+
+    }; // method
+
+} // class

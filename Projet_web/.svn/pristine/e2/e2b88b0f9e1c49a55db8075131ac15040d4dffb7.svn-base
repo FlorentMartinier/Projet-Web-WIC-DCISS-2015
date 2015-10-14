@@ -1,0 +1,130 @@
+function MusicPlayerController() {
+
+    //this.musicPlayer = new MusicPlayerLocalClient();
+    this.musicPlayer = new MusicPlayerRestClient();
+
+    this.currentTrack   = null;
+    this.proposedTracks = [];
+
+    this.playing = false;
+
+}
+
+MusicPlayerController.prototype.updatePlaylist = function () {
+
+    this.currentTrack = this.musicPlayer.getCurrentTrack();
+
+    if (!this.playing) {
+        this.play();
+    }
+
+    view.refreshCurrentTrack(this.currentTrack);
+
+    var newPropTracks = this.musicPlayer.getProposedTracks();
+
+    if (!arePropTracksEqual(newPropTracks, this.proposedTracks)) {
+
+        // affichage de l'image animée de chargement
+        view.loadingProposedTracks();
+
+        this.proposedTracks = newPropTracks;
+        view.refreshProposedTracks(this.proposedTracks);
+
+        cont.refreshPlayerTrackList();
+
+    }
+
+    setTimeout(function() {
+        cont.updatePlaylist();
+    }, 1000);
+
+};
+
+MusicPlayerController.prototype.play = function () {
+
+    if (this.currentTrack != null) {
+
+        // calcul de la position de lecture
+        //var posLecture = parseInt(Math.ceil(this.currentTrack.position / this.currentTrack.duration * 100));
+        //
+        //lastStartTime = Date.now();
+
+        var tracks = [this.currentTrack.id];
+
+        for (var i  = 0; i < this.proposedTracks.length; i++) {
+            tracks.push(this.proposedTracks[i].id);
+        }
+
+        DZ.player.playTracks(tracks, 0, parseInt(this.currentTrack.position));
+
+        this.playing = true;
+
+    }
+
+};
+
+MusicPlayerController.prototype.refreshPlayerTrackList = function () {
+
+    var trackList = DZ.player.getTrackList();
+    var newTrackList = [cont.currentTrack.id];
+
+    // on ajoute les pistes qui ne sont pas encore dans la trackList du player
+    for (var i = 0; i < this.proposedTracks.length; i++) {
+
+        if ($.inArray(parseInt(this.proposedTracks[i].id), trackList) == -1) {
+            DZ.player.addToQueue([this.proposedTracks[i].id]);
+        }
+
+        newTrackList.push(this.proposedTracks[i].id);
+
+    }
+
+    DZ.player.changeTrackOrder(newTrackList);
+
+}
+
+MusicPlayerController.prototype.searchTrack = function (search) {
+
+    view.loadingSearch();
+
+    DZ.api('/search/track?q=' + search, function(response){
+        view.setSearchResult(response.data);
+    });
+
+};
+
+MusicPlayerController.prototype.getCatalog = function () {
+
+    view.loadingCatalog();
+
+    var catalog = this.musicPlayer.getCatalog();
+
+    view.displayCatalog(catalog);
+
+};
+
+MusicPlayerController.prototype.proposeTrack = function (trackID, button) {
+
+    button = $(button).parent();
+
+    view.loadingButton(button, false);
+
+    this.musicPlayer.proposeTrack(trackID, button, function(button) {
+        view.disableButton(button, false);
+    });
+
+};
+
+MusicPlayerController.prototype.vote = function (trackID, button) {
+
+    listeVotes.push(parseInt(trackID));
+
+    button = $(button).parent();
+
+    view.loadingButton(button, true);
+
+    this.musicPlayer.voteTrack(trackID, button, function(button) {
+        view.disableButton(button, true);
+    });
+
+};

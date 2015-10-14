@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+	  <meta charset="utf-8"/>
+	  <link rel="stylesheet" href="../css/styleCatalogue.css" type="text/css" />
+	  <title>Catalogue de musique</title>
+	</head>
+	<body>
+		<h1>Catalogue de musiques</h1>
+		<?php
+		  ini_set('display_errors', 'On');
+		  error_reporting(E_ALL | E_STRICT);
+		  
+		  $bdd = mysqli_connect("localhost","root","","catalogue_musique");
+		  if (mysqli_connect_errno()) {
+			echo "Failed to connect to MySQL: " . mysqli_connect_error();
+		  }
+		  
+		  function afficherTitres() {
+			global $bdd;
+			$titres = mysqli_query($bdd,"SELECT titre, album, artiste, cover FROM chanson");	
+		?>
+			<table>
+				<tr>
+					<th id="vide"></th>
+					<th id="titre">titre</th>
+					<th id="artiste">artiste</th>
+					<th id="album">album</th>
+					<th id="vote">vote</th>
+				</tr>
+		<?php
+			while ($assoc = mysqli_fetch_assoc($titres)) {
+				echo '<tr>';
+					echo '<td><img src="'.$assoc['cover'].'"/></td>';
+					echo '<td>'.$assoc['titre'].'</td>';
+					echo '<td>'.$assoc['artiste'].'</td>';
+					echo '<td>'.$assoc['album'].'</td>';
+					echo '<td></td>';
+				echo '</tr>';
+			}
+			echo '</table>';
+		}
+
+		afficherTitres();
+		 ?>
+	 </body>
+ </html>

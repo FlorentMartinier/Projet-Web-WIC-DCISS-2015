@@ -1,0 +1,5 @@
+récupération des infos sur les chansons via l'API deezer
+permettre la recherche et la proposition de chansons
+permettre de voter pour une chanson (côté UI et côté service)
+côté REST : implémenter PUT /playlist/proposedTracks
+refaire l'affichage du player (pour éviter d'avoir la grosse fenêtre deezer) -> contrôle de la musique grace à l'API deezer
